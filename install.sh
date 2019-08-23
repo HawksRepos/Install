@@ -9,7 +9,7 @@
 ################################################################################
 #function
 logfile=/var/log/log.info
-package_list="curl wget software-properties-common git zip unrar unzip dialog sudo nano htop mc lshw atop iotop rsync docker-ce"
+package_list="curl wget software-properties-common git zip unrar unzip dialog sudo nano htop mc lshw atop iotop rsync"
 
 ##fast change the editions
 edition=master
