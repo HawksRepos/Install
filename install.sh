@@ -227,16 +227,16 @@ rm -rf /opt/pgstage/place.holder 2>&1 >> /dev/null
 git clone -b $edition --single-branch https://github.com/MrDoobPG/Install.git /opt/pgstage 1>/dev/null 2>&1
 
 mkdir -p /var/plexguide/logs
-echo "" > /var/plexguide/server.ports
-echo "51" > /var/plexguide/pg.pythonstart
+echo "" >/var/plexguide/server.ports
+echo "51" >/var/plexguide/pg.pythonstart
 touch /var/plexguide/pg.pythonstart.stored
 start=$(cat /var/plexguide/pg.pythonstart)
 stored=$(cat /var/plexguide/pg.pythonstart.stored)
 
 if [ "$start" != "$stored" ]; then
-bash /opt/pgstage/pyansible.sh 2>&1 >> /dev/null
+    bash /opt/pgstage/pyansible.sh
 fi
-echo "51" > /var/plexguide/pg.pythonstart.stored
+echo "51" >/var/plexguide/pg.pythonstart.stored
 
 #pip upgrade
 pip install --upgrade pip 2>&1 >> /dev/null

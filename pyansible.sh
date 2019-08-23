@@ -9,8 +9,7 @@ apt-get install -y --reinstall \
   python3-pip \
   python3-testresources \
   python-dev \
-  python-pip \
-  docker-ce
+  python-pip
 python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall pip==19.1.1
 python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall setuptools
 python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall \
