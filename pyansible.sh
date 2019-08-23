@@ -9,21 +9,24 @@ apt-get install -y --reinstall \
   python3-pip \
   python3-testresources \
   python-dev \
-  python-pip
+  python-pip \
+  docker-ce
 python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall pip==19.1.1
 python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall setuptools
 python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall \
   pyOpenSSL \
   requests \
   netaddr \
-  lxml
+  lxml \
+  docker-py
 python -m pip install --disable-pip-version-check --upgrade --force-reinstall pip==19.1.1
 python -m pip install --disable-pip-version-check --upgrade --force-reinstall setuptools
 python -m pip install --disable-pip-version-check --upgrade --force-reinstall \
   pyOpenSSL \
   requests \
   netaddr \
-  lxml
+  lxml \
+  docker-py
 python -m pip install --disable-pip-version-check --upgrade --force-reinstall ansible==${1-2.8.2}
 
 ## Copy pip to /usr/bin
