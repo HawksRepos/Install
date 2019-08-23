@@ -132,6 +132,8 @@ EOF
 sleep 5
 ##usercheck
 if [ $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}') ]; then
+	usermod -aG sudo $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
+        sudo usermod -s /bin/bash $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         echo ""
         echo " ✅ PASSED ! We found the user UID " $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
