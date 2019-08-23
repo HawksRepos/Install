@@ -1,15 +1,13 @@
 #!/bin/bash
 ###############################################################################
-# Title:    PTS | PTS ( base installer )
-# Coder: 	MrDoob - freelance Coder | ammj93 | prodengineer pr00f
-# URL: 		you will find use
-# Base:	    https://github.com/MrDoobPG
+# Title: PTS Base installer
+# Coder : 	MrDoob - freelance Coder | ammj93 | prodengineer pr00f
 # GNU: General Public License v3.0E
 #
 ################################################################################
 #function
 logfile=/var/log/log.info
-package_list="curl wget software-properties-common git zip unrar unzip dialog sudo nano htop mc lshw atop iotop rsync"
+package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw"
 
 ##fast change the editions
 edition=master
@@ -17,14 +15,14 @@ edition=master
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  INSTALLING: PTS Notice
+🌎  INSTALLING: PGBlitz Notice
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-By Installing PTS, you are agreeing to the terms and conditions
+By Installing PGBlitz, you are agreeing to the terms and conditions
 of the GNUv3 Project License! Please Standby...
 
-Thanks To: 
+Thanks To:
 Davaz, Deiteq, FlickerRate, ClownFused, MrDoob, Sub7Seven,
-TimeKills, The Creator, Desimaniac, l3uddz, 
+TimeKills, The Creator, Desimaniac, l3uddz,
 and to the caring Community (& Linux Noobs)!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
@@ -101,6 +99,7 @@ elif echo $osname "Rasbian" "Fedora" "CentOS"; then
 	echo " ⛔ Warning!"
 	echo " ⛔ Warning Only Ubuntu release 16/18.04 LTS/SERVER and Debian 9 above are supported"
 	echo " ⛔ Warning Your system does not appear to be supported"
+	echo " ⛔ Warning Check https://pgblitz.com/threads/pg-install-instructions.243/"
 	echo " ⛔ Warning!"
 	echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
        	exit 1
@@ -135,7 +134,7 @@ sleep 5
 if [ $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}') ]; then
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         echo ""
-        echo " ✅ PASSED ! We found your local user : " $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
+        echo " ✅ PASSED ! We found the user UID " $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
         echo ""
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 else
@@ -172,7 +171,7 @@ sleep 10
 if [ "$(free -m | grep Mem | awk 'NR=1 {print $2}')" -ge "8190" ]; then
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	echo ""
-	echo " ✅️  PASSED ! PTS RAM test okay"
+	echo " ✅️  PASSED ! PGBlitz RAM test okay"
 	echo " ✅️  PASSED ! RAM Space meets recommended requirements"
 	echo ""
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && sleep 2
@@ -227,44 +226,41 @@ rm -rf /opt/pgstage/place.holder 2>&1 >> /dev/null
 git clone -b $edition --single-branch https://github.com/MrDoobPG/Install.git /opt/pgstage 1>/dev/null 2>&1
 
 mkdir -p /var/plexguide/logs
-echo "" >/var/plexguide/server.ports
-echo "51" >/var/plexguide/pg.pythonstart
+echo "" > /var/plexguide/server.ports
+echo "51" > /var/plexguide/pg.pythonstart
 touch /var/plexguide/pg.pythonstart.stored
 start=$(cat /var/plexguide/pg.pythonstart)
 stored=$(cat /var/plexguide/pg.pythonstart.stored)
 
 if [ "$start" != "$stored" ]; then
-    bash /opt/pgstage/pyansible.sh
+bash /opt/pgstage/pyansible.sh 2>&1 >> /dev/null
 fi
-echo "51" >/var/plexguide/pg.pythonstart.stored
+echo "51" > /var/plexguide/pg.pythonstart.stored
 
 #pip upgrade
 pip install --upgrade pip 2>&1 >> /dev/null
 echo "PIP updated"
-pip install docker-py 2>&1 >> /dev/nul
-echo "docker-py installed"
 
 ansible-playbook /opt/pgstage/clone.yml 2>&1 >> /dev/null
 cp /opt/plexguide/menu/alias/templates/plexguide /bin/plexguide 2>&1 >> /dev/null
 cp /opt/plexguide/menu/alias/templates/pgblitz /bin/pgblitz 2>&1 >> /dev/null
 cp /opt/plexguide/menu/alias/templates/pg /bin/pg 2>&1 >> /dev/null
-cp /opt/plexguide/menu/alias/templates/pts /bin/pts 2>&1 >> /dev/null
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⌛  Verifiying PTS / PTS Installed - Standby!
+⌛  Verifiying PGBlitz / PGBlitz Installed @ /bin/plexguide - Standby!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 2
 
-file="/bin/pts"
+file="/bin/plexguide"
 if [ ! -e "$file" ]; then
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔️  WARNING! Installed Failed! PTS / PTS Command Missing!
+⛔️  WARNING! Installed Failed! PGBlitz / PGBlitz Command Missing!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Please Reinstall PTS by running the Command Again! We are doing
+Please Reinstall PGBlitz by running the Command Again! We are doing
 this to ensure that your installation continues to work!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
@@ -272,7 +268,7 @@ exit
 fi
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅️ PASSED! The PTS / PTS Command Installed!
+✅️ PASSED! The PGBlitz / PGBlitz Command Installed!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ PASSED ! Your Username        : $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
 ✅ PASSED ! Operations System    : $(lsb_release -sd)
@@ -290,7 +286,7 @@ chmod 775 /bin/plexguide
 chown 1000:1000 /bin/plexguide
 chmod 775 /bin/pgblitz
 chown 1000:1000 /bin/pgblitz
-chmod 775 /bin/pts
+chmod 775 /bin/pg
 chown 1000:1000 /bin/pts
 
 ## Other Folders
