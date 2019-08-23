@@ -228,17 +228,21 @@ rm -rf /opt/pgstage/place.holder 2>&1 >> /dev/null
 git clone -b $edition --single-branch https://github.com/MrDoobPG/Install.git /opt/pgstage 1>/dev/null 2>&1
 
 mkdir -p /var/plexguide/logs
-echo "" > /var/plexguide/server.ports
-echo "51" > /var/plexguide/pg.pythonstart
+echo "" >/var/plexguide/server.ports
+echo "51" >/var/plexguide/pg.pythonstart
 touch /var/plexguide/pg.pythonstart.stored
 start=$(cat /var/plexguide/pg.pythonstart)
 stored=$(cat /var/plexguide/pg.pythonstart.stored)
 
 if [ "$start" != "$stored" ]; then
-bash /opt/pgstage/pyansible.sh 2>&1 >> /dev/null
+    bash /opt/pgstage/pyansible.sh
 fi
-echo "51" > /var/plexguide/pg.pythonstart.stored
+echo "51" >/var/plexguide/pg.pythonstart.stored
 
+ansible-playbook /opt/pgstage/clone.yml
+cp /opt/plexguide/menu/alias/templates/plexguide /bin/plexguide
+cp /opt/plexguide/menu/alias/templates/pgblitz /bin/pgblitz
+cp /opt/plexguide/menu/alias/templates/pts /bin/pts
 #pip upgrade
 pip install --upgrade pip 2>&1 >> /dev/null
 echo "PIP updated"
@@ -250,17 +254,17 @@ cp /opt/plexguide/menu/alias/templates/pg /bin/pg 2>&1 >> /dev/null
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⌛  Verifiying PGBlitz / PGBlitz Installed @ /bin/plexguide - Standby!
+⌛  Verifiying PTS Install @ /bin/pts - Standby!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 2
 
-file="/bin/plexguide"
+file="/bin/pts"
 if [ ! -e "$file" ]; then
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔️  WARNING! Installed Failed! PGBlitz / PGBlitz Command Missing!
+⛔️  WARNING! Installed Failed! PTS Command Missing!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Please Reinstall PGBlitz by running the Command Again! We are doing
 this to ensure that your installation continues to work!
@@ -270,7 +274,7 @@ exit
 fi
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅️ PASSED! The PGBlitz / PGBlitz Command Installed!
+✅️ PASSED! The PTS Command Installed!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ PASSED ! Your Username        : $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
 ✅ PASSED ! Operations System    : $(lsb_release -sd)
