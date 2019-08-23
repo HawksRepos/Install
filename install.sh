@@ -1,11 +1,11 @@
 #!/bin/bash
 ###############################################################################
-# Title: PlexGuide | PGBlitz ( base installer )
+# Title: PlexGuide | PTS ( base installer )
 #
 # Author(s): 	Admin9705 
 # Coder : 	MrDoob - freelance Coder | ammj93 | prodengineer pr00f
-# URL: 		https://pgblitz.com
-# Base :	http://github.pgblitz.com
+# URL: 		https://PTS.com
+# Base :	http://github.PTS.com
 # GNU: General Public License v3.0E
 #
 ################################################################################
@@ -19,9 +19,9 @@ edition=master
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  INSTALLING: PGBlitz Notice
+🌎  INSTALLING: PTS Notice
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-By Installing PGBlitz, you are agreeing to the terms and conditions
+By Installing PTS, you are agreeing to the terms and conditions
 of the GNUv3 Project License! Please Standby...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
@@ -128,8 +128,9 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 5
-##usercheck
 if [ $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}') ]; then
+	usermod -aG sudo $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
+        sudo usermod -s /bin/bash $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         echo ""
         echo " ✅ PASSED ! We found the user UID " $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
@@ -164,12 +165,17 @@ tee <<-EOF
 😂 What a Lame name: $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+😂 What a Lame name: $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
 sleep 10
 #ram test
 if [ "$(free -m | grep Mem | awk 'NR=1 {print $2}')" -ge "8190" ]; then
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	echo ""
-	echo " ✅️  PASSED ! PGBlitz RAM test okay"
+	echo " ✅️  PASSED ! PTS RAM test okay"
 	echo " ✅️  PASSED ! RAM Space meets recommended requirements"
 	echo ""
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && sleep 2
@@ -243,10 +249,11 @@ ansible-playbook /opt/pgstage/clone.yml 2>&1 >> /dev/null
 cp /opt/plexguide/menu/alias/templates/plexguide /bin/plexguide 2>&1 >> /dev/null
 cp /opt/plexguide/menu/alias/templates/pgblitz /bin/pgblitz 2>&1 >> /dev/null
 cp /opt/plexguide/menu/alias/templates/pg /bin/pg 2>&1 >> /dev/null
+cp /opt/plexguide/menu/alias/templates/pts /bin/pts 2>&1 >> /dev/null
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⌛  Verifiying PGBlitz / PGBlitz Installed @ /bin/plexguide - Standby!
+⌛  Verifiying PTS / PTS Installed @ /bin/plexguide - Standby!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 2
@@ -256,9 +263,9 @@ if [ ! -e "$file" ]; then
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔️  WARNING! Installed Failed! PGBlitz / PGBlitz Command Missing!
+⛔️  WARNING! Installed Failed! PTS / PTS Command Missing!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Please Reinstall PGBlitz by running the Command Again! We are doing
+Please Reinstall PTS by running the Command Again! We are doing
 this to ensure that your installation continues to work!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
@@ -266,7 +273,7 @@ exit
 fi
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅️ PASSED! The PGBlitz / PGBlitz Command Installed!
+✅️ PASSED! The PTS / PTS Command Installed!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ PASSED ! Your Username        : $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
 ✅ PASSED ! Operations System    : $(lsb_release -sd)
@@ -284,8 +291,8 @@ chmod 775 /bin/plexguide
 chown 1000:1000 /bin/plexguide
 chmod 775 /bin/pgblitz
 chown 1000:1000 /bin/pgblitz
-chmod 775 /bin/pg
-chown 1000:1000 /bin/pg
+chmod 775 /bin/pts
+chown 1000:1000 /bin/pts
 
 ## Other Folders
 mkdir -p /opt/appdata/plexguide
@@ -293,6 +300,6 @@ mkdir -p /var/plexguide
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-↘️  Start AnyTime By Typing >>> pgblitz [or] plexguide
+↘️  Start AnyTime By Typing >>> pts [or] plexguide [or] pgblitz
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
