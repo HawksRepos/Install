@@ -241,6 +241,8 @@ echo "51" > /var/plexguide/pg.pythonstart.stored
 #pip upgrade
 pip install --upgrade pip 2>&1 >> /dev/null
 echo "PIP updated"
+pip install docker-py 2>&1 >> /dev/nul
+echo "docker-py installed"
 
 ansible-playbook /opt/pgstage/clone.yml 2>&1 >> /dev/null
 cp /opt/plexguide/menu/alias/templates/plexguide /bin/plexguide 2>&1 >> /dev/null
