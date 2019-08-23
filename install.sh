@@ -1,17 +1,15 @@
 #!/bin/bash
 ###############################################################################
-# Title: PlexGuide | PTS ( base installer )
-#
-# Author(s): 	Admin9705 
-# Coder : 	MrDoob - freelance Coder | ammj93 | prodengineer pr00f
-# URL: 		https://PTS.com
-# Base :	http://github.PTS.com
+# Title:    PTS | PTS ( base installer )
+# Coder: 	MrDoob - freelance Coder | ammj93 | prodengineer pr00f
+# URL: 		you will find use
+# Base:	    https://github.com/MrDoobPG
 # GNU: General Public License v3.0E
 #
 ################################################################################
 #function
 logfile=/var/log/log.info
-package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw"
+package_list="curl wget software-properties-common git zip unrar unzip dialog sudo nano htop mc lshw atop iotop rsync"
 
 ##fast change the editions
 edition=master
@@ -23,6 +21,11 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 By Installing PTS, you are agreeing to the terms and conditions
 of the GNUv3 Project License! Please Standby...
+
+Thanks To: 
+Davaz, Deiteq, FlickerRate, ClownFused, MrDoob, Sub7Seven,
+TimeKills, The Creator, Desimaniac, l3uddz, 
+and to the caring Community (& Linux Noobs)!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 3
