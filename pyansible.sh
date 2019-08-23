@@ -17,16 +17,14 @@ python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall \
   pyOpenSSL \
   requests \
   netaddr \
-  lxml \
-  docker-py
+  lxml
 python -m pip install --disable-pip-version-check --upgrade --force-reinstall pip==19.1.1
 python -m pip install --disable-pip-version-check --upgrade --force-reinstall setuptools
 python -m pip install --disable-pip-version-check --upgrade --force-reinstall \
   pyOpenSSL \
   requests \
   netaddr \
-  lxml \
-  docker-py
+  lxml
 python -m pip install --disable-pip-version-check --upgrade --force-reinstall ansible==${1-2.8.2}
 
 ## Copy pip to /usr/bin
