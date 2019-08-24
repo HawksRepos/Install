@@ -211,8 +211,8 @@ echo "PIP updated"
 ansible-playbook /opt/pgstage/clone.yml 2>&1 >> /dev/null
 cp /opt/plexguide/menu/alias/templates/plexguide /bin/plexguide 2>&1 >> /dev/null
 cp /opt/plexguide/menu/alias/templates/pgblitz /bin/pgblitz 2>&1 >> /dev/null
-cp /opt/plexguide/menu/alias/templates/pg /bin/pg 2>&1 >> /dev/null
-
+cp /opt/plexguide/menu/alias/templates/pts /bin/pts 2>&1 >> /dev/null
+cp /opt/plexguide/menu/alias/templates/ptsadd /bin/ptsadd 2>&1 >> /dev/null
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛  Verifiying PTS Install @ /bin/pts - Standby!
@@ -254,6 +254,8 @@ chmod 775 /bin/pgblitz
 chown 1000:1000 /bin/pgblitz
 chmod 775 /bin/pg
 chown 1000:1000 /bin/pts
+chmod 775 /bin/ptsadd
+chown 1000:1000 /bin/ptsadd
 
 ## Other Folders
 mkdir -p /opt/appdata/plexguide
@@ -264,6 +266,6 @@ tee <<-EOF
 ↘️  Start AnyTime By Typing >>> pts [or] plexguide [or] pgblitz
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ↘️  What to add an USER with UID 1000 type
-    ptsadd
+     ptsadd
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
