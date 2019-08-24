@@ -15,9 +15,9 @@ edition=master
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  INSTALLING: PGBlitz Notice
+🌎  INSTALLING: PTS Notice
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-By Installing PGBlitz, you are agreeing to the terms and conditions
+By Installing PTS, you are agreeing to the terms and conditions
 of the GNUv3 Project License! Please Standby...
 
 Thanks To:
