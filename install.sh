@@ -252,7 +252,7 @@ chmod 775 /bin/plexguide
 chown 1000:1000 /bin/plexguide
 chmod 775 /bin/pgblitz
 chown 1000:1000 /bin/pgblitz
-chmod 775 /bin/pg
+chmod 775 /bin/pts
 chown 1000:1000 /bin/pts
 chmod 775 /bin/ptsadd
 chown 1000:1000 /bin/ptsadd
