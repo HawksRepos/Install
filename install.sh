@@ -17,8 +17,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎  INSTALLING: PTS Notice
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-By Installing PTS, you are agreeing to the terms and conditions
-of the GNUv3 Project License! Please Standby...
+By installing, you agreeing to the terms and conditions of the GNUv3 License!
 		┌─────────────────────────────────────┐
 		│                                     │
 		│ Thanks to:                          │
@@ -64,7 +63,7 @@ elif lsof -Pi :443 -sTCP:LISTEN -t >/dev/null ; then
         apt-get autoclean -yqq 2>&1 >> /dev/null
 
 else
-    echo "Good no service runs on port 80 & 443"
+        echo "Good no service runs on port 80 & 443"
 fi
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -81,43 +80,40 @@ apt-get install lsb-release -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
 apt-get install software-properties-common -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
-#repo-check
+
 fullrel=$(lsb_release -sd)
 osname=$(lsb_release -si)
-## original code relno=$(lsb_release -sr | cut -d. -f1)
 relno=$(lsb_release -sr)
+relno=$(printf "%.0f\n" "$relno")
 hostname=$(hostname -I | awk '{print $1}')
 # add repo
-osname=$([ "$osname" = "Ubuntu" ] && [ $relno -ge 15 ] && [ $relno -le 18.09 ) || ([ "$osname" = "Debian" ] && [ $relno -ge 8 ])
-if echo $osname "Debian" ; then
+
+if echo $osname "Debian" &>/dev/null; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository non-free 2>&1 >> /dev/null
 	add-apt-repository contrib 2>&1 >> /dev/null
-elif echo $osname "Ubuntu" ; then
+elif echo $osname "Ubuntu" &>/dev/null; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository universe 2>&1 >> /dev/null
 	add-apt-repository restricted 2>&1 >> /dev/null
 	add-apt-repository multiverse 2>&1 >> /dev/null
 elif echo $osname "Rasbian" "Fedora" "CentOS"; then
-	echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	echo " ⛔ Warning!"
-	echo " ⛔ Warning Only Ubuntu release 16/18.04 LTS/SERVER and Debian 9 above are supported"
-	echo " ⛔ Warning Your system does not appear to be supported"
-	echo " ⛔ Warning Check https://pgblitz.com/threads/pg-install-instructions.243/"
-	echo " ⛔ Warning!"
-	echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-       	exit 1
+
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ Argggggg ......  System Warning! 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
+
+This server may not be supported due to having the incorrect OS detected!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+  sleep 10
 fi
-tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ PASSED Base Install - finish
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⌛  Update the System - Standby
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
+
 apt-get update -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
 apt-get upgrade -yqq 2>&1 >> /dev/null
@@ -204,19 +200,14 @@ if [ "$start" != "$stored" ]; then
 fi
 echo "51" >/var/plexguide/pg.pythonstart.stored
 
-ansible-playbook /opt/pgstage/clone.yml
-cp /opt/plexguide/menu/alias/templates/plexguide /bin/plexguide
-cp /opt/plexguide/menu/alias/templates/pgblitz /bin/pgblitz
-cp /opt/plexguide/menu/alias/templates/pts /bin/pts
 #pip upgrade
 pip install --upgrade pip 2>&1 >> /dev/null
 echo "PIP updated"
 
 ansible-playbook /opt/pgstage/clone.yml 2>&1 >> /dev/null
-cp /opt/plexguide/menu/alias/templates/plexguide /bin/plexguide 2>&1 >> /dev/null
-cp /opt/plexguide/menu/alias/templates/pgblitz /bin/pgblitz 2>&1 >> /dev/null
-cp /opt/plexguide/menu/alias/templates/pts /bin/pts 2>&1 >> /dev/null
-cp /opt/plexguide/menu/alias/templates/ptsadd /bin/ptsadd 2>&1 >> /dev/null
+pts="/opt/plexguide/menu/alias/template/*"
+cp -rt /bin $pts/*
+
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛  Verifiying PTS Install @ /bin/pts - Standby!
@@ -229,10 +220,11 @@ if [ ! -e "$file" ]; then
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔️  WARNING! Installed Failed! PTS Command Missing!
+⛔️  WARNING! Installed Failed! PTS Installer Failed !
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Please Reinstall PTS by running the Command Again! We are doing
-this to ensure that your installation continues to work!
+Please reinstall PTS by running the Command Again! 
+We are doing this to ensure that your installation continues to work!
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 exit
@@ -252,14 +244,10 @@ tee <<-EOF
 EOF
 rm -rf /var/plexguide/new.install 1>/dev/null 2>&1
 sleep 2
-chmod 775 /bin/plexguide
-chown 1000:1000 /bin/plexguide
-chmod 775 /bin/pgblitz
-chown 1000:1000 /bin/pgblitz
-chmod 775 /bin/pts
-chown 1000:1000 /bin/pts
-chmod 775 /bin/ptsadd
-chown 1000:1000 /bin/ptsadd
+
+var="/bin/plexguide /bin/pts /bin/pgblitz /bin/ptsadd"
+chmod $var
+chown 1000:1000 $var
 
 ## Other Folders
 mkdir -p /opt/appdata/plexguide
@@ -267,9 +255,13 @@ mkdir -p /var/plexguide
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 ↘️  Start AnyTime By Typing >>> pts [or] plexguide [or] pgblitz
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 ↘️  Want to add an USER with UID 1000 type
 ↘️  ptsadd
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
