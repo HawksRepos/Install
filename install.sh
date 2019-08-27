@@ -205,7 +205,7 @@ pip install --upgrade pip 2>&1 >> /dev/null
 echo "PIP updated"
 
 ansible-playbook /opt/pgstage/clone.yml 2>&1 >> /dev/null
-pts="/opt/plexguide/menu/alias/template/*"
+pts="/opt/plexguide/menu/alias/templates"
 cp -rt /bin $pts/*
 
 tee <<-EOF
