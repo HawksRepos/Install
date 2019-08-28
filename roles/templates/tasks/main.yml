@@ -1,0 +1,50 @@
+#!/bin/bash
+#
+# Title:      PTS Install base
+# Author(s):  MrDoobPG
+# GNU:        General Public License v3.0
+################################################################################
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+# command files
+    - name: Copy PTS file 
+      copy:
+        src: ./files/pts
+        dest: /bin
+        owner: '1000'
+        group: '1000'
+        mode: '0755'
+
+    - name: Copy PTS-Useradd file
+      copy:
+        src: ./files/ptsadd
+        dest: /bin
+        owner: '1000'
+        group: '1000'
+        mode: '0755'
+
+    - name: Copy PTS-Update file
+      copy:
+        src: ./files/ptsupdate
+        dest: /bin
+        owner: '1000'
+        group: '1000'
+        mode: '0755'
+
+   - name: Copy System Update file
+      copy:
+        src: ./files/update
+        dest: /bin
+        owner: '1000'
+        group: '1000'
+        mode: '0755'
+
+   - name: Copy System Update file
+      copy:
+        src: ./files/upgrade
+        dest: /bin
+        owner: '1000'
+        group: '1000'
+        mode: '0755'

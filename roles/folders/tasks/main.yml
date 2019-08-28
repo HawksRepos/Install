@@ -1,0 +1,43 @@
+#!/bin/bash
+#
+# Title:      PTS Install base
+# Author(s):  MrDoobPG
+# GNU:        General Public License v3.0
+################################################################################
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create base folder
+      file:
+        path: /var/plexguide
+        state: directory
+        recurse: yes
+        owner: '1000'
+        group: '1000'
+        mode: '0755'
+
+    - stat:
+        path: /var/plexguide
+      register: p
+      
+    - debug:
+        msg: "Path exists and is a directory"
+       when: p.stat.isdir is defined and p.stat.isdir
+
+    - name: Create log folder
+      file:
+        path: /var/plexguide/logs
+        state: directory
+        recurse: yes
+        owner: '1000'
+        group: '1000'
+        mode: '0755'
+
+    - stat:
+        path: /var/plexguide/logs
+      register: p
+      
+    - debug:
+        msg: "Path exists and is a directory"
+       when: p.stat.isdir is defined and p.stat.isdir

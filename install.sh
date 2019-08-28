@@ -18,6 +18,9 @@ tee <<-EOF
 🌎  INSTALLING: PTS Notice
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 By installing, you agreeing to the terms and conditions of the GNUv3 License!
+
+We don't want to make money or an big ego, so go away or hate me ^^
+
 		┌─────────────────────────────────────┐
 		│                                     │
 		│ Thanks to:                          │
@@ -26,6 +29,10 @@ By installing, you agreeing to the terms and conditions of the GNUv3 License!
 		│ ClownFused, MrDoob, Sub7Seven,      │
 		│ TimeKills, The_Creator, Desimaniac, │
 		│ l3uddz, RXWatcher,Calmcacli, Porkie │
+		│                                     │
+		│ and all other guys                  │
+		│                                     │
+		│ @TheShadow you are welcome          │
 		└─────────────────────────────────────┘
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
@@ -92,12 +99,13 @@ if echo $osname "Debian" &>/dev/null; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository non-free 2>&1 >> /dev/null
 	add-apt-repository contrib 2>&1 >> /dev/null
+	wget -qN https://raw.githubusercontent.com/MrDoobPG/Install/master/roles/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
 elif echo $osname "Ubuntu" &>/dev/null; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository universe 2>&1 >> /dev/null
 	add-apt-repository restricted 2>&1 >> /dev/null
 	add-apt-repository multiverse 2>&1 >> /dev/null
-        apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
+    apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
 elif echo $osname "Rasbian" "Fedora" "CentOS"; then
 
 tee <<-EOF
@@ -135,7 +143,7 @@ sleep 5
 if [ "$(free -m | grep Mem | awk 'NR=1 {print $2}')" -ge "8190" ]; then
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	echo ""
-	echo " ✅️  PASSED ! PGBlitz RAM test okay"
+	echo " ✅️  PASSED ! RAM test okay"
 	echo " ✅️  PASSED ! RAM Space meets recommended requirements"
 	echo ""
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && sleep 2
@@ -145,7 +153,6 @@ if [ "$(free -m | grep Mem | awk 'NR=1 {print $2}')" -le "4095" ]; then
 	echo ""
 	echo " ⛔ Warning !"
 	echo " ⛔ Warning ! Your RAM space is too low , you can run into issues"
-	echo " ⛔ Warning ! PG will run fine, but do not run too many Apps"
 	echo " ⛔ Warning !"
 	echo ""
 	echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && sleep 2
@@ -172,7 +179,6 @@ if [ $space -le "81920" ] ; then
         echo ""
         echo " ⛔ Warning !"
         echo " ⛔ Warning ! Your HDD space is too low , you can run into issues"
-        echo " ⛔ Warning ! PG will run fine, but do not run too many Apps"
         echo " ⛔ Warning !"
         echo ""
         echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && sleep 2
@@ -187,9 +193,15 @@ if [ -e "$file" ]; then rm -rf /opt/pgstage; fi
 
 rm -rf /opt/pgstage/place.holder 2>&1 >> /dev/null
 
-git clone -b $edition --single-branch https://github.com/MrDoobPG/Install.git /opt/pgstage 1>/dev/null 2>&1
+#roles / running 
 
-mkdir -p /var/plexguide/logs
+ansible-playbook /opt/pgstage/pts.yml --tags tasks
+ansible-playbook /opt/pgstage/pts.yml --tags installer
+ansible-playbook /opt/pgstage/pts.yml --tags source
+ansible-playbook /opt/pgstage/pts.yml --tags folders
+
+#roles / done 
+
 echo "" >/var/plexguide/server.ports
 echo "51" >/var/plexguide/pg.pythonstart
 touch /var/plexguide/pg.pythonstart.stored
@@ -197,17 +209,13 @@ start=$(cat /var/plexguide/pg.pythonstart)
 stored=$(cat /var/plexguide/pg.pythonstart.stored)
 
 if [ "$start" != "$stored" ]; then
-    bash /opt/pgstage/pyansible.sh
+     ansible-playbook /opt/pgstage/pts.yml --tags meta
 fi
 echo "51" >/var/plexguide/pg.pythonstart.stored
 
 #pip upgrade
 pip install --upgrade pip 2>&1 >> /dev/null
 echo "PIP updated"
-
-ansible-playbook /opt/pgstage/clone.yml 2>&1 >> /dev/null
-pts="/opt/plexguide/menu/alias/templates"
-cp -rt /bin $pts/*
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -246,13 +254,16 @@ EOF
 rm -rf /var/plexguide/new.install 1>/dev/null 2>&1
 sleep 2
 
-var="/bin/plexguide /bin/pts /bin/pgblitz /bin/ptsadd"
-chmod $var
-chown 1000:1000 $var
-
+# var="/bin/plexguide /bin/pts /bin/pgblitz /bin/ptsadd"
+# chmod 755 $var
+# chown -cR 1000:1000 $var
 ## Other Folders
-mkdir -p /opt/appdata/plexguide
-mkdir -p /var/plexguide
+# mkdir -p /opt/appdata/plexguide
+# mkdir -p /var/plexguide
+##endrunning
+ansible-playbook /opt/pgstage/pts.yml --tags templates
+ansible-playbook /opt/pgstage/pts.yml --tags folders
+
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
