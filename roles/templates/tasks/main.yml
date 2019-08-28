@@ -33,7 +33,7 @@
         group: '1000'
         mode: '0755'
 
-   - name: Copy System Update file
+   - name: Copy System update file
       copy:
         src: ./files/update
         dest: /bin
@@ -41,7 +41,7 @@
         group: '1000'
         mode: '0755'
 
-   - name: Copy System Update file
+   - name: Copy System upgrade file
       copy:
         src: ./files/upgrade
         dest: /bin
