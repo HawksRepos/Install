@@ -97,6 +97,7 @@ elif echo $osname "Ubuntu" &>/dev/null; then
 	add-apt-repository universe 2>&1 >> /dev/null
 	add-apt-repository restricted 2>&1 >> /dev/null
 	add-apt-repository multiverse 2>&1 >> /dev/null
+        apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
 elif echo $osname "Rasbian" "Fedora" "CentOS"; then
 
 tee <<-EOF
