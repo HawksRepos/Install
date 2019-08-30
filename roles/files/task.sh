@@ -10,24 +10,24 @@ apt-get install -y --reinstall \
   python3-testresources \
   python-dev \
   python-pip
-python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall pip==19.1.1
+python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall pip==19.2.3
 python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall setuptools
 python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall \
   pyOpenSSL \
   requests \
   netaddr \
   lxml
-python -m pip install --disable-pip-version-check --upgrade --force-reinstall pip==19.1.1
-python -m pip install --disable-pip-version-check --upgrade --force-reinstall setuptools
-python -m pip install --disable-pip-version-check --upgrade --force-reinstall \
-  pyOpenSSL \
-  requests \
-  netaddr \
-  lxml
-python -m pip install --disable-pip-version-check --upgrade --force-reinstall ansible==${1-2.8.2}
+# python -m pip install --disable-pip-version-check --upgrade --force-reinstall pip==19.1.1
+# python -m pip install --disable-pip-version-check --upgrade --force-reinstall setuptools
+# python -m pip install --disable-pip-version-check --upgrade --force-reinstall \
+  # pyOpenSSL \
+  # requests \
+  # netaddr \
+  # lxml
+python3 -m pip install --disable-pip-version-check --upgrade --force-reinstall ansible==${1-2.8.2}
 
 ## Copy pip to /usr/bin
-cp /usr/local/bin/pip /usr/bin/pip
+# cp /usr/local/bin/pip /usr/bin/pip
 cp /usr/local/bin/pip3 /usr/bin/pip3
 
 mkdir -p /etc/ansible/inventories/ 1>/dev/null 2>&1
