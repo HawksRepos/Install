@@ -7,7 +7,7 @@
 ################################################################################
 #function
 logfile=/var/log/log.info
-package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw"
+package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible"
 
 ##fast change the editions
 edition=master
