@@ -8,5 +8,5 @@
 - hosts: localhost
   gather_facts: false
   tasks:
-      - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
-        shell: ./file/task.sh
+    - name: Python3 | Ansible | pip | set values.
+      shell: bash /opt/pgstage/roles/files/task.sh >> /var/log/log-install.txt
