@@ -245,7 +245,7 @@ sleep 10
  echo "4" >/var/plexguide/kcgpnv.numbers
 newinstall="$(tail -n 1 /var/plexguide/kcgpnv.numbers)"
 
-if [ "$newinstall" == "4" ]; then
+if [[ "$newinstall" == "4" ]]; then
   ansible-playbook /opt/plexguide/menu/pg.yml --tags kernel
   ansible-playbook /opt/plexguide/menu/pg.yml --tags nvidia
   ansible-playbook /opt/plexguide/menu/pg.yml --tags system
