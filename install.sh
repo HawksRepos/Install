@@ -80,7 +80,7 @@ EOF
 sleep 5
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⌛  Base install - Standby
+⌛  Base install - Standby || this can take some minutes
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 apt-get install lsb-release -yqq 2>&1 >> /dev/null
@@ -95,18 +95,18 @@ relno=$(printf "%.0f\n" "$relno")
 hostname=$(hostname -I | awk '{print $1}')
 # add repo
 
-if echo $osname "Debian" &>/dev/null; then
+if echo $osname == "Debian" 2>&1 >> /dev/null; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository non-free 2>&1 >> /dev/null
 	add-apt-repository contrib 2>&1 >> /dev/null
 	wget -qN https://raw.githubusercontent.com/MrDoobPG/Install/master/roles/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
-elif echo $osname "Ubuntu" &>/dev/null; then
+elif echo $osname == "Ubuntu" 2>&1 >> /dev/null; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository universe 2>&1 >> /dev/null
 	add-apt-repository restricted 2>&1 >> /dev/null
 	add-apt-repository multiverse 2>&1 >> /dev/null
     apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
-elif echo $osname "Rasbian" "Fedora" "CentOS"; then
+elif echo $osname == "Rasbian" || "Fedora" || "CentOS"; then
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -194,10 +194,10 @@ if [ -e "$file" ]; then rm -rf /opt/pgstage; fi
 rm -rf /opt/pgstage/place.holder 2>&1 >> /dev/null
 
 #roles / running 
-
+git clone -b $edition --single-branch https://github.com/MrDoobPG/Install.git /opt/pgstage 1>/dev/null 2>&1
 ansible-playbook /opt/pgstage/pts.yml --tags tasks
 ansible-playbook /opt/pgstage/pts.yml --tags installer
-ansible-playbook /opt/pgstage/pts.yml --tags source
+# ansible-playbook /opt/pgstage/pts.yml --tags source
 ansible-playbook /opt/pgstage/pts.yml --tags folders
 
 #roles / done 
