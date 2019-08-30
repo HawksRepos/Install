@@ -8,15 +8,12 @@
 - hosts: localhost
   gather_facts: false
   tasks:
-## base install
     - name: Cloning Installer 
       git:
         repo: 'https://github.com/MrDoobPG/Install.git'
         dest: /opt/pgstage
         version: 'master'
         force: yes
-
-## create base folder
 
     - name: Create base folder
       file:
@@ -27,14 +24,6 @@
         group: '1000'
         mode: '0755'
 
-    - stat:
-        path: /var/plexguide
-      register: p
-      
-    - debug:
-        msg: "Path exists and is a directory"
-       when: p.stat.isdir is defined and p.stat.isdir
-
     - name: Create log folder
       file:
         path: /var/plexguide/logs
@@ -44,16 +33,6 @@
         group: '1000'
         mode: '0755'
 
-    - stat:
-        path: /var/plexguide/logs
-      register: p
-      
-    - debug:
-        msg: "Path exists and is a directory"
-       when: p.stat.isdir is defined and p.stat.isdir
-
-## rest repo
-
     - name: Cloning PTS 
       git:
         repo: 'https://github.com/MrDoobPG/PGBlitz.com'
@@ -61,51 +40,37 @@
         version: 'master'
         force: yes
 
- ## special part
-      - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
-        shell: ./file/task.sh >> /var/log/log-install.txt
+    - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+        shell: /opt/plexguide/roles/file/task.sh >> /var/log/log-install.txt
 
-# command files
     - name: Copy PTS file 
       copy:
-        src: ./files/pts
-        dest: /bin
+        src: /opt/plexguide/roles/files/pts
+        dest: /bin/pts
         owner: '1000'
         group: '1000'
         mode: '0755'
 
     - name: Copy PTS-Useradd file
       copy:
-        src: ./files/ptsadd
-        dest: /bin
+        src: /opt/plexguide/roles/files/ptsadd
+        dest: /bin/ptsadd
         owner: '1000'
         group: '1000'
         mode: '0755'
 
-    - name: Copy PTS-Update file
+    - name: Copy PTS-System-upgrade file
       copy:
-        src: ./files/ptsupdate
-        dest: /bin
+        src: /opt/plexguide/roles/files/upgrade
+        dest: /bin/upgrade
         owner: '1000'
         group: '1000'
         mode: '0755'
 
-   - name: Copy System update file
+    - name: Copy PTS-System-update file
       copy:
-        src: ./files/update
-        dest: /bin
+        src: /opt/plexguide/roles/files/update
+        dest: /bin/upgrade
         owner: '1000'
         group: '1000'
         mode: '0755'
-
-   - name: Copy System upgrade file
-      copy:
-        src: ./files/upgrade
-        dest: /bin
-        owner: '1000'
-        group: '1000'
-        mode: '0755'
-
- ## special part
-      - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
-        shell: ./file/task.sh
