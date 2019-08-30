@@ -242,6 +242,7 @@ tee <<-EOF
 EOF
 sleep 10
 
+ echo "4" >/var/plexguide/kcgpnv.numbers
 newinstall="$(tail -n 1 /var/plexguide/kcgpnv.numbers)"
 
 if [ "$newinstall" == "4" ]; then
@@ -251,7 +252,7 @@ if [ "$newinstall" == "4" ]; then
   ansible-playbook /opt/plexguide/menu/pg.yml --tags common
   echo "8" >/var/plexguide/kcgpnv.numbers
 fi
-
+sleep 2
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛  Verifiying PTS Install @ /bin/pts - Standby!
