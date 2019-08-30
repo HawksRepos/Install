@@ -40,9 +40,6 @@
         version: 'master'
         force: yes
 
-    # - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
-      # shell: /opt/pgstage/roles/files/task.sh >> /var/log/log-install.txt
-
     - name: Copy PTS file 
       copy:
         src: /opt/pgstage/roles/files/pts

@@ -6,7 +6,7 @@
 #
 ################################################################################
 #function
-logfile=/var/log/log.info
+logfile=/var/log/log-install.txt
 package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible"
 
 ##fast change the editions
@@ -113,7 +113,7 @@ tee <<-EOF
 ⛔ Argggggg ......  System Warning! 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
+Supported: UBUNTU 18.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
 
 This server may not be supported due to having the incorrect OS detected!
 
@@ -196,6 +196,8 @@ rm -rf /opt/pgstage/place.holder 2>&1 >> /dev/null
 #roles / running 
 git clone -b $edition --single-branch https://github.com/MrDoobPG/Install.git /opt/pgstage 1>/dev/null 2>&1
 ansible-playbook /opt/pgstage/roles/main.yml
+#roles part 2
+
 #roles / done 
 
 echo "" >/var/plexguide/server.ports
@@ -212,6 +214,43 @@ echo "51" >/var/plexguide/pg.pythonstart.stored
 #pip upgrade
 pip install --upgrade pip 2>&1 >> /dev/null
 echo "PIP updated"
+
+if echo $osname == "Debian" 2>&1 >> /dev/null; then
+ansible-playbook (opt/pgstage/roles/dependency/debian-9.yml
+elif echo $osname == "Ubuntu" 2>&1 >> /dev/null; then
+ansible-playbook (opt/pgstage/roles/dependency/ubtunu-18.04-lts.yml
+elif echo $osname == "Rasbian" || "Fedora" || "CentOS"; then
+
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ Argggggg ......  System Warning! 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
+
+This server may not be supported due to having the incorrect OS detected!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+  sleep 10
+fi
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⌛  We do a lot of tweak | please let its run - Standby!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+sleep 10
+
+newinstall="$(tail -n 1 /var/plexguide/kcgpnv.numbers)"
+
+if [ "$newinstall" == "4" ]; then
+  ansible-playbook /opt/plexguide/menu/pg.yml --tags kernel
+  ansible-playbook /opt/plexguide/menu/pg.yml --tags nvidia
+  ansible-playbook /opt/plexguide/menu/pg.yml --tags system
+  ansible-playbook /opt/plexguide/menu/pg.yml --tags common
+  echo "8" >/var/plexguide/kcgpnv.numbers
+fi
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
