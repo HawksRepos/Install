@@ -242,7 +242,7 @@ tee <<-EOF
 EOF
 sleep 10
 touch /var/plexguide/kcgpnv.numbers
- echo "4" >/var/plexguide/kcgpnv.numbers
+ echo -e "4" >/var/plexguide/kcgpnv.numbers
 newinstall="$(tail -n 1 /var/plexguide/kcgpnv.numbers)"
 
 if [[ "$newinstall" == "4" ]]; then
