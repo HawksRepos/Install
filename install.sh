@@ -32,7 +32,7 @@ We don't want to make money or an big ego, so go away or hate me ^^
 		│                                     │
 		│ and all other guys                  │
 		│                                     │
-		│ @TheShadow you are welcome          │
+		│ @TheShadow you are welcome          │	
 		└─────────────────────────────────────┘
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
@@ -80,7 +80,7 @@ EOF
 sleep 5
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⌛  Base install - Standby || this can take some minutes
+⌛  Base install - Standby  || this can take some minutes
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 apt-get install lsb-release -yqq 2>&1 >> /dev/null
@@ -105,15 +105,15 @@ elif echo $osname == "Ubuntu" 2>&1 >> /dev/null; then
 	add-apt-repository universe 2>&1 >> /dev/null
 	add-apt-repository restricted 2>&1 >> /dev/null
 	add-apt-repository multiverse 2>&1 >> /dev/null
-    apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
-elif echo $osname == "Rasbian" || "Fedora" || "CentOS"; then
+        apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
+elif echo $osname "Rasbian" || "Fedora" || "CentOS"; then
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔ Argggggg ......  System Warning! 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Supported: UBUNTU 18.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
+Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
 
 This server may not be supported due to having the incorrect OS detected!
 
@@ -193,13 +193,9 @@ if [ -e "$file" ]; then rm -rf /opt/pgstage; fi
 
 rm -rf /opt/pgstage/place.holder 2>&1 >> /dev/null
 
-#roles / running 
 git clone -b $edition --single-branch https://github.com/MrDoobPG/Install.git /opt/pgstage 1>/dev/null 2>&1
-ansible-playbook /opt/pgstage/roles/main.yml
-#roles part 2
 
-#roles / done 
-
+mkdir -p /var/plexguide/logs
 echo "" >/var/plexguide/server.ports
 echo "51" >/var/plexguide/pg.pythonstart
 touch /var/plexguide/pg.pythonstart.stored
@@ -207,7 +203,7 @@ start=$(cat /var/plexguide/pg.pythonstart)
 stored=$(cat /var/plexguide/pg.pythonstart.stored)
 
 if [ "$start" != "$stored" ]; then
-     ansible-playbook /opt/pgstage/roles/meta.yml
+    bash /opt/pgstage/pyansible.sh
 fi
 echo "51" >/var/plexguide/pg.pythonstart.stored
 
@@ -215,44 +211,10 @@ echo "51" >/var/plexguide/pg.pythonstart.stored
 pip install --upgrade pip 2>&1 >> /dev/null
 echo "PIP updated"
 
-# if echo $osname == "Debian" 2>&1 >> /dev/null; then
-# ansible-playbook /opt/pgstage/roles/dependency/debian-9.yml
-# elif echo $osname == "Ubuntu" 2>&1 >> /dev/null; then
-# ansible-playbook /opt/pgstage/roles/dependency/ubtunu-18.04-lts.yml
-# elif echo $osname == "Rasbian" || "Fedora" || "CentOS"; then
+ansible-playbook /opt/pgstage/clone.yml 2>&1 >> /dev/null
+pts="/opt/plexguide/menu/alias/templates"
+cp -rt /bin $pts/*
 
-# tee <<-EOF
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# ⛔ Argggggg ......  System Warning! 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-# Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
-
-# This server may not be supported due to having the incorrect OS detected!
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-# EOF
-  # sleep 10
-# fi
-tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⌛  We do a lot of tweak | please let its run - Standby!
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-sleep 0.5
-touch /var/plexguide/kcgpnv.numbers
- echo -e "4" >/var/plexguide/kcgpnv.numbers
-newinstall="$(tail -n 1 /var/plexguide/kcgpnv.numbers)"
-sleep 2
-if [ "$newinstall" != "8" ]; then
-  ansible-playbook /opt/plexguide/menu/pg.yml --tags kernel
-  ansible-playbook /opt/plexguide/menu/pg.yml --tags nvidia
-  ansible-playbook /opt/plexguide/menu/pg.yml --tags system
-  ansible-playbook /opt/plexguide/menu/pg.yml --tags common
-  echo "8" >/var/plexguide/kcgpnv.numbers
-fi
-sleep 2
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛  Verifiying PTS Install @ /bin/pts - Standby!
@@ -290,16 +252,13 @@ EOF
 rm -rf /var/plexguide/new.install 1>/dev/null 2>&1
 sleep 2
 
-# var="/bin/plexguide /bin/pts /bin/pgblitz /bin/ptsadd"
-# chmod 755 $var
-# chown -cR 1000:1000 $var
-## Other Folders
-# mkdir -p /opt/appdata/plexguide
-# mkdir -p /var/plexguide
-##endrunning
-# ansible-playbook /opt/pgstage/pts.yml --tags templates
-# ansible-playbook /opt/pgstage/pts.yml --tags folders
+var="/bin/plexguide /bin/pts /bin/pgblitz /bin/ptsadd"
+chmod $var
+chown 1000:1000 $var
 
+## Other Folders
+mkdir -p /opt/appdata/plexguide
+mkdir -p /var/plexguide
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
