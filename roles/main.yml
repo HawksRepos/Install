@@ -16,6 +16,42 @@
         version: 'master'
         force: yes
 
+## create base folder
+
+    - name: Create base folder
+      file:
+        path: /var/plexguide
+        state: directory
+        recurse: yes
+        owner: '1000'
+        group: '1000'
+        mode: '0755'
+
+    - stat:
+        path: /var/plexguide
+      register: p
+      
+    - debug:
+        msg: "Path exists and is a directory"
+       when: p.stat.isdir is defined and p.stat.isdir
+
+    - name: Create log folder
+      file:
+        path: /var/plexguide/logs
+        state: directory
+        recurse: yes
+        owner: '1000'
+        group: '1000'
+        mode: '0755'
+
+    - stat:
+        path: /var/plexguide/logs
+      register: p
+      
+    - debug:
+        msg: "Path exists and is a directory"
+       when: p.stat.isdir is defined and p.stat.isdir
+
 ## rest repo
 
     - name: Cloning PTS 
@@ -25,11 +61,14 @@
         version: 'master'
         force: yes
 
-# command files
+ ## special part
+      - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+        shell: ./file/task.sh >> /var/log/log-install.txt
 
+# command files
     - name: Copy PTS file 
       copy:
-        src: /opt/pgstage/roles/bin/pts
+        src: ./files/pts
         dest: /bin
         owner: '1000'
         group: '1000'
@@ -37,7 +76,7 @@
 
     - name: Copy PTS-Useradd file
       copy:
-        src: /opt/pgstage/roles/bin/ptsadd
+        src: ./files/ptsadd
         dest: /bin
         owner: '1000'
         group: '1000'
@@ -45,8 +84,28 @@
 
     - name: Copy PTS-Update file
       copy:
-        src: /opt/pgstage/roles/bin/ptsupdate
+        src: ./files/ptsupdate
         dest: /bin
         owner: '1000'
         group: '1000'
         mode: '0755'
+
+   - name: Copy System update file
+      copy:
+        src: ./files/update
+        dest: /bin
+        owner: '1000'
+        group: '1000'
+        mode: '0755'
+
+   - name: Copy System upgrade file
+      copy:
+        src: ./files/upgrade
+        dest: /bin
+        owner: '1000'
+        group: '1000'
+        mode: '0755'
+
+ ## special part
+      - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+        shell: ./file/task.sh

@@ -195,11 +195,7 @@ rm -rf /opt/pgstage/place.holder 2>&1 >> /dev/null
 
 #roles / running 
 git clone -b $edition --single-branch https://github.com/MrDoobPG/Install.git /opt/pgstage 1>/dev/null 2>&1
-ansible-playbook /opt/pgstage/pts.yml --tags tasks
-ansible-playbook /opt/pgstage/pts.yml --tags installer
-# ansible-playbook /opt/pgstage/pts.yml --tags source
-ansible-playbook /opt/pgstage/pts.yml --tags folders
-
+ansible-playbook /opt/pgstage/roles/main.yml
 #roles / done 
 
 echo "" >/var/plexguide/server.ports
@@ -209,7 +205,7 @@ start=$(cat /var/plexguide/pg.pythonstart)
 stored=$(cat /var/plexguide/pg.pythonstart.stored)
 
 if [ "$start" != "$stored" ]; then
-     ansible-playbook /opt/pgstage/pts.yml --tags meta
+     ansible-playbook /opt/pgstage/roles/meta.yml
 fi
 echo "51" >/var/plexguide/pg.pythonstart.stored
 
@@ -261,8 +257,8 @@ sleep 2
 # mkdir -p /opt/appdata/plexguide
 # mkdir -p /var/plexguide
 ##endrunning
-ansible-playbook /opt/pgstage/pts.yml --tags templates
-ansible-playbook /opt/pgstage/pts.yml --tags folders
+# ansible-playbook /opt/pgstage/pts.yml --tags templates
+# ansible-playbook /opt/pgstage/pts.yml --tags folders
 
 
 tee <<-EOF
