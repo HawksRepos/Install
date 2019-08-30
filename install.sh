@@ -216,9 +216,9 @@ pip install --upgrade pip 2>&1 >> /dev/null
 echo "PIP updated"
 
 if echo $osname == "Debian" 2>&1 >> /dev/null; then
-ansible-playbook (opt/pgstage/roles/dependency/debian-9.yml
+ansible-playbook /opt/pgstage/roles/dependency/debian-9.yml
 elif echo $osname == "Ubuntu" 2>&1 >> /dev/null; then
-ansible-playbook (opt/pgstage/roles/dependency/ubtunu-18.04-lts.yml
+ansible-playbook /opt/pgstage/roles/dependency/ubtunu-18.04-lts.yml
 elif echo $osname == "Rasbian" || "Fedora" || "CentOS"; then
 
 tee <<-EOF
