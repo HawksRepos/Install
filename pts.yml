@@ -4,7 +4,7 @@
     extra: ''
 
   roles:
-    - { role: installer, tags: ['installer'] }
+    # - { role: installer, tags: ['installer'] }
     - { role: tasks, tags: ['tasks'] }
     - { role: source, tags: ['source'] }
     - { role: templates, tags: ['templates'] }
