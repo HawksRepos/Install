@@ -250,6 +250,7 @@ if [ "$newinstall" != "8" ]; then
   ansible-playbook /opt/plexguide/menu/pg.yml --tags nvidia
   ansible-playbook /opt/plexguide/menu/pg.yml --tags system
   ansible-playbook /opt/plexguide/menu/pg.yml --tags common
+  ansible-playbook /opt/plexguide/menu/pg.yml --tags docker
   echo "8" >/var/plexguide/kcgpnv.numbers
 fi
 sleep 2
