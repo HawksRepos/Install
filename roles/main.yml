@@ -8,12 +8,12 @@
 - hosts: localhost
   gather_facts: false
   tasks:
-    # - name: Cloning Installer 
-      # git:
-        # repo: 'https://github.com/MrDoobPG/Install.git'
-        # dest: /opt/pgstage
-        # version: 'master'
-        # force: yes
+    - name: Cloning Installer 
+      git:
+        repo: 'https://github.com/MrDoobPG/Install.git'
+        dest: /opt/pgstage
+        version: 'master'
+        force: no
 
     - name: Create base folder
       file:
