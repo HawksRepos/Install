@@ -215,26 +215,26 @@ echo "51" >/var/plexguide/pg.pythonstart.stored
 pip install --upgrade pip 2>&1 >> /dev/null
 echo "PIP updated"
 
-if echo $osname == "Debian" 2>&1 >> /dev/null; then
-ansible-playbook /opt/pgstage/roles/dependency/debian-9.yml
-elif echo $osname == "Ubuntu" 2>&1 >> /dev/null; then
-ansible-playbook /opt/pgstage/roles/dependency/ubtunu-18.04-lts.yml
-elif echo $osname == "Rasbian" || "Fedora" || "CentOS"; then
+# if echo $osname == "Debian" 2>&1 >> /dev/null; then
+# ansible-playbook /opt/pgstage/roles/dependency/debian-9.yml
+# elif echo $osname == "Ubuntu" 2>&1 >> /dev/null; then
+# ansible-playbook /opt/pgstage/roles/dependency/ubtunu-18.04-lts.yml
+# elif echo $osname == "Rasbian" || "Fedora" || "CentOS"; then
 
-tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ Argggggg ......  System Warning! 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# tee <<-EOF
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ⛔ Argggggg ......  System Warning! 
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
+# Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
 
-This server may not be supported due to having the incorrect OS detected!
+# This server may not be supported due to having the incorrect OS detected!
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-EOF
-  sleep 10
-fi
+# EOF
+  # sleep 10
+# fi
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛  We do a lot of tweak | please let its run - Standby!
@@ -250,7 +250,6 @@ if [ "$newinstall" != "8" ]; then
   ansible-playbook /opt/plexguide/menu/pg.yml --tags nvidia
   ansible-playbook /opt/plexguide/menu/pg.yml --tags system
   ansible-playbook /opt/plexguide/menu/pg.yml --tags common
-  ansible-playbook /opt/plexguide/menu/pg.yml --tags docker
   echo "8" >/var/plexguide/kcgpnv.numbers
 fi
 sleep 2
