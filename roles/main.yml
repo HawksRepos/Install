@@ -41,7 +41,7 @@
         force: yes
 
     - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
-        shell: /opt/plexguide/roles/files/task.sh >> /var/log/log-install.txt
+      shell: /opt/plexguide/roles/files/task.sh >> /var/log/log-install.txt
 
     - name: Copy PTS file 
       copy:
