@@ -240,12 +240,12 @@ tee <<-EOF
 ⌛  We do a lot of tweak | please let its run - Standby!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-sleep 10
+sleep 0.5
 touch /var/plexguide/kcgpnv.numbers
  echo -e "4" >/var/plexguide/kcgpnv.numbers
 newinstall="$(tail -n 1 /var/plexguide/kcgpnv.numbers)"
-
-if [[ "$newinstall" == "4" ]]; then
+sleep 2
+if [ "$newinstall" != "8" ]; then
   ansible-playbook /opt/plexguide/menu/pg.yml --tags kernel
   ansible-playbook /opt/plexguide/menu/pg.yml --tags nvidia
   ansible-playbook /opt/plexguide/menu/pg.yml --tags system
