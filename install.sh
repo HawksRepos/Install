@@ -95,18 +95,18 @@ relno=$(printf "%.0f\n" "$relno")
 hostname=$(hostname -I | awk '{print $1}')
 # add repo
 
-if echo $osname == "Debian" 2>&1 >> /dev/null; then
+if [ $osname == "Debian" 2>&1 >> /dev/null ] ; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository non-free 2>&1 >> /dev/null
 	add-apt-repository contrib 2>&1 >> /dev/null
 	wget -qN https://raw.githubusercontent.com/MrDoobPG/Install/master/roles/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
-elif echo $osname == "Ubuntu" 2>&1 >> /dev/null; then
+elif [ $osname == "Ubuntu" 2>&1 >> /dev/null ]; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository universe 2>&1 >> /dev/null
 	add-apt-repository restricted 2>&1 >> /dev/null
 	add-apt-repository multiverse 2>&1 >> /dev/null
-        apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
-elif echo $osname "Rasbian" || "Fedora" || "CentOS"; then
+    apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
+elif [ $osname  == "Rasbian" || "Fedora" || "CentOS" ]; then
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
