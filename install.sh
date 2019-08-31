@@ -61,14 +61,12 @@ if lsof -Pi :80 -sTCP:LISTEN -t >/dev/null ; then
         apt-get purge apache nginx -yqq 2>&1 >> /dev/null
         apt-get autoremove -yqq 2>&1 >> /dev/null
         apt-get autoclean -yqq 2>&1 >> /dev/null
-	
 elif lsof -Pi :443 -sTCP:LISTEN -t >/dev/null ; then
         service apache2 stop 2>&1 >> /dev/null
         service nginx stop 2>&1 >> /dev/null
         apt-get purge apache nginx -yqq 2>&1 >> /dev/null
         apt-get autoremove -yqq 2>&1 >> /dev/null
         apt-get autoclean -yqq 2>&1 >> /dev/null
-
 else
         echo "Good no service runs on port 80 & 443"
 fi
@@ -122,7 +120,6 @@ This server may not be supported due to having the incorrect OS detected!
 EOF
   sleep 10
 fi
-
 apt-get update -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
 apt-get upgrade -yqq 2>&1 >> /dev/null
