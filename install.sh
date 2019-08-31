@@ -253,7 +253,7 @@ rm -rf /var/plexguide/new.install 1>/dev/null 2>&1
 sleep 2
 
 var="/bin/plexguide /bin/pts /bin/pgblitz /bin/ptsadd"
-chmod $var
+chmod +x $var
 chown 1000:1000 $var
 
 ## Other Folders
