@@ -94,8 +94,8 @@ hostname=$(hostname -I | awk '{print $1}')
 
 # add repo
 touch /var/log/osname.log 
-echo lsb_release -si >> /var/log/osname.log
-oo=$(tail -n 1 /var/log/osname.og)
+echo $osname >> /var/log/osname.log
+oo=$(tail -n 1 /var/log/osname.log)
 
 if [ $oo == "Debian" }; then
 	add-apt-repository main 2>&1 >> /dev/null
