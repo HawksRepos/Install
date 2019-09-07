@@ -132,27 +132,6 @@ apt-get autoremove -yqq 2>&1 >> /dev/null
 apt-get install $package_list -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
 
-if [ $oo == "Debian" ]; then
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-apt-get update -yqq 2>&1 >> /dev/null
-	export DEBIAN_FRONTEND=noninteractive
-elif [ $oo == "Ubuntu" ]; then
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-apt-get update -yqq 2>&1 >> /dev/null
-	export DEBIAN_FRONTEND=noninteractive
-elif [ $oo  == "Rasbian" || "Fedora" || "CentOS" ]; then
-tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ Argggggg ......  System Warning! 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Docker preinstall failed
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-  sleep 2
-fi
-
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ PASSED Update the System - finish
