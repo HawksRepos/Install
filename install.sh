@@ -142,13 +142,14 @@ apt-get install $package_list -yqq 2>&1 >> /dev/null
 
 if [ $oo == "Debian" ]; then
 	sudo add-apt-repository "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /etc/apt/sources.list
-	sudo add-apt-repository "deb http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list
-	sudo add-apt-repository "deb-src http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list
+	sudo echo "deb http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list
+	sudo echo "deb-src http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list
 	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 apt-get update -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
 apt-get install $packdeb_lists -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
+
 elif [ $oo == "Ubuntu" ]; then
     sudo add-apt-repository --yes --update ppa:ansible/ansible >> /dev/null
 	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >> /etc/apt/sources.list
