@@ -158,7 +158,6 @@ if [ -e "/opt/plexguide" ]; then rm -rf /opt/plexguide; fi
 if [ -e "/opt/pgstage" ]; then rm -rf /opt/pgstage; fi
 rm -rf /opt/pgstage/place.holder 2>&1 >> /dev/null
 
-
 git clone -b $edition --single-branch https://github.com/MrDoobPG/Install.git /opt/pgstage 1>/dev/null 2>&1
 
 mkdir -p /var/plexguide/logs
