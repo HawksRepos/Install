@@ -140,19 +140,24 @@ apt-get install $package_list -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
 
 if [ $oo == "Debian" ]; then
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 	sudo add-apt-repository "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /etc/apt/sources.list
 	sudo echo "deb http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list
 	sudo echo "deb-src http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list
+	curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+	sudo apt-key fingerprint 0EBFCD88
 	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 apt-get update -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
-apt-get install $packdeb_lits -yqq 2>&1 >> /dev/null
+apt-get install $packdeb_lits -yqq --allow-unauthenticated 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
 
 elif [ $oo == "Ubuntu" ]; then
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo apt-key fingerprint 0EBFCD88
     sudo add-apt-repository --yes --update ppa:ansible/ansible >> /dev/null
 	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >> /etc/apt/sources.list
-apt-get install $packubu_lits -yqq 2>&1 >> /dev/null
+apt-get install $packubu_lits -yqq --allow-unauthenticated 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
 elif [ $oo  == "Rasbian" || "Fedora" || "CentOS" ]; then
 tee <<-EOF
