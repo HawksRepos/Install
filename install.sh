@@ -136,51 +136,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 5
-#ram test
-if [ "$(free -m | grep Mem | awk 'NR=1 {print $2}')" -ge "8190" ]; then
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	echo ""
-	echo " ✅️  PASSED ! RAM test okay"
-	echo " ✅️  PASSED ! RAM Space meets recommended requirements"
-	echo ""
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && sleep 2
-fi
-if [ "$(free -m | grep Mem | awk 'NR=1 {print $2}')" -le "4095" ]; then
-	echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	echo ""
-	echo " ⛔ Warning !"
-	echo " ⛔ Warning ! Your RAM space is too low , you can run into issues"
-	echo " ⛔ Warning !"
-	echo ""
-	echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && sleep 2
-fi
-space="$(df -m / --total --local -x tmpfs | grep 'total' | awk '{print $2}')"
-if [ $space -gt "511900" ] ; then
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        echo ""
-        echo " ✅  PASSED! HDD Space test okay"
-        echo " ✅  PASSED! HDD Sapce meets Recommended requirement"
-        echo ""
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"  && sleep 2
-fi
-if [ "$space" -ge "81920" -a "$space" -le "511899" ] ; then 
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        echo ""
-        echo " ⌛  INFO ! HDD Space test okay"
-        echo " ⌛  INFO ! over Minimum requirement and under Recommend"
-        echo ""
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"  && sleep 2
-fi
-if [ $space -le "81920" ] ; then
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        echo ""
-        echo " ⛔ Warning !"
-        echo " ⛔ Warning ! Your HDD space is too low , you can run into issues"
-        echo " ⛔ Warning !"
-        echo ""
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && sleep 2
-fi
-sleep 2
+
 # Delete If it Exist for Cloning
 file="/opt/plexguide"
 if [ -e "$file" ]; then rm -rf /opt/plexguide; fi
