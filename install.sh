@@ -101,28 +101,28 @@ if [ $oo == "Debian" ]; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository non-free 2>&1 >> /dev/null
 	add-apt-repository contrib 2>&1 >> /dev/null
-<<<<<<< HEAD
+
 	# sudo add-apt-repository "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /etc/apt/sources.list 2>&1 >> /dev/null
 	# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 	# sudo add-apt-repository "deb http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list 2>&1 >> /dev/null
 	# sudo add-apt-repository "deb-src http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list 2>&1 >> /dev/null
 	# sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" 2>&1 >> /dev/null
 	# sudo curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add - 
-=======
-	wget -qN https://raw.githubusercontent.com/MrDoobPG/Install/master/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
->>>>>>> parent of 51abd6a... Update install.sh
+
+	#wget -qN https://raw.githubusercontent.com/MrDoobPG/Install/master/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
+
 elif [ $oo == "Ubuntu" ]; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository universe 2>&1 >> /dev/null
 	add-apt-repository restricted 2>&1 >> /dev/null
 	add-apt-repository multiverse 2>&1 >> /dev/null
-<<<<<<< HEAD
-    # sudo apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
+
+        # sudo apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
 	# sudo add-apt-repository"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >> /etc/apt/sources.list
 	# sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - 
-=======
-    apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
->>>>>>> parent of 51abd6a... Update install.sh
+
+       apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
+
 elif [ $oo  == "Rasbian" || "Fedora" || "CentOS" ]; then
 
 tee <<-EOF
