@@ -122,7 +122,7 @@ This server may not be supported due to having the incorrect OS detected!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  sleep 10
+  sleep 2
 fi
 apt-get update -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
