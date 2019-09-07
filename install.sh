@@ -91,20 +91,24 @@ osname=$(lsb_release -si)
 relno=$(lsb_release -sr)
 relno=$(printf "%.0f\n" "$relno")
 hostname=$(hostname -I | awk '{print $1}')
-# add repo
 
-if [ $osname == "Debian" 2>&1 >> /dev/null ] ; then
+# add repo
+touch /var/log/osname.log 
+echo $osname >> /var/log/osname.log
+oo=$(tail -n 1 /var/log/osname.og)
+
+if [[$oo == "Debian"]}; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository non-free 2>&1 >> /dev/null
 	add-apt-repository contrib 2>&1 >> /dev/null
-	wget -qN https://raw.githubusercontent.com/MrDoobPG/Install/master/roles/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
-elif [ $osname == "Ubuntu" 2>&1 >> /dev/null ]; then
+	wget -qN https://raw.githubusercontent.com/MrDoobPG/Install/master/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
+elif [[$oo == "Ubuntu"]]; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository universe 2>&1 >> /dev/null
 	add-apt-repository restricted 2>&1 >> /dev/null
 	add-apt-repository multiverse 2>&1 >> /dev/null
     apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
-elif [ $osname  == "Rasbian" || "Fedora" || "CentOS" ]; then
+elif [ $oo  == "Rasbian" || "Fedora" || "CentOS" ]; then
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -138,13 +142,10 @@ EOF
 sleep 5
 
 # Delete If it Exist for Cloning
-file="/opt/plexguide"
-if [ -e "$file" ]; then rm -rf /opt/plexguide; fi
-
-file="/opt/pgstage"
-if [ -e "$file" ]; then rm -rf /opt/pgstage; fi
-
+if [ -e "/opt/plexguide" ]; then rm -rf /opt/plexguide; fi
+if [ -e "/opt/pgstage" ]; then rm -rf /opt/pgstage; fi
 rm -rf /opt/pgstage/place.holder 2>&1 >> /dev/null
+
 
 git clone -b $edition --single-branch https://github.com/MrDoobPG/Install.git /opt/pgstage 1>/dev/null 2>&1
 
