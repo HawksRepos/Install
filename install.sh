@@ -97,7 +97,7 @@ touch /var/log/osname.log
 echo $osname >> /var/log/osname.log
 oo=$(tail -n 1 /var/log/osname.log)
 
-if [ $oo == "Debian" }; then
+if [ $oo == "Debian" ]; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository non-free 2>&1 >> /dev/null
 	add-apt-repository contrib 2>&1 >> /dev/null
