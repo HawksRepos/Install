@@ -104,10 +104,10 @@ if [ $oo == "Debian" ]; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository non-free 2>&1 >> /dev/null
 	add-apt-repository contrib 2>&1 >> /dev/null
-	echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /etc/apt/sources.list
-	echo "deb http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list
-	echo "deb-src http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list
-	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+	echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /etc/apt/sources.list 2>&1 >> /dev/null
+	echo "deb http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list 2>&1 >> /dev/null
+	echo "deb-src http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list 2>&1 >> /dev/null
+	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" 2>&1 >> /dev/null
 elif [ $oo == "Ubuntu" ]; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository universe 2>&1 >> /dev/null
