@@ -9,6 +9,9 @@
 logfile=/var/log/log-install.txt
 package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible"
 
+packdeb_lits="apt-transport-https ca-certificates curl gnupg2 software-properties-common  docker-ce docker-ce-cli containerd.io"
+packubu_lits="apt-transport-https ca-certificates curl gnupg-agent software-properties-common docker-ce docker-ce-cli containerd.io"
+
 ##fast change the editions
 edition=master
 ##fast change the editions
@@ -101,13 +104,17 @@ if [ $oo == "Debian" ]; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository non-free 2>&1 >> /dev/null
 	add-apt-repository contrib 2>&1 >> /dev/null
-	wget -qN https://raw.githubusercontent.com/MrDoobPG/Install/master/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
+	echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /etc/apt/sources.list
+	echo "deb http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list
+	echo "deb-src http://ftp.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list
+	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 elif [ $oo == "Ubuntu" ]; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository universe 2>&1 >> /dev/null
 	add-apt-repository restricted 2>&1 >> /dev/null
 	add-apt-repository multiverse 2>&1 >> /dev/null
     apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
+	echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >> /etc/apt/sources.list
 elif [ $oo  == "Rasbian" || "Fedora" || "CentOS" ]; then
 
 tee <<-EOF
@@ -140,6 +147,8 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 5
+
+if [ $oo == "Debian" ]; then
 
 # Delete If it Exist for Cloning
 if [ -e "/opt/plexguide" ]; then rm -rf /opt/plexguide; fi
