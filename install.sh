@@ -8,6 +8,8 @@
 #function
 logfile=/var/log/log-install.txt
 package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible"
+packdeb_lits="apt-transport-https ca-certificates curl gnupg2 software-properties-common  docker-ce docker-ce-cli containerd.io"
+packubu_lits="apt-transport-https ca-certificates curl gnupg-agent software-properties-common docker-ce docker-ce-cli containerd.io"
 
 ##fast change the editions
 edition=master
@@ -111,6 +113,8 @@ elif [ $oo == "Ubuntu" ]; then
 
 elif [ $oo  == "Rasbian" || "Fedora" || "CentOS" ]; then
 
+
+
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔ Argggggg ......  System Warning! 
@@ -135,6 +139,29 @@ apt-get autoremove -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
 apt-get install $package_list -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
+
+if [ $oo == "Debian" ]; then
+apt-get install $packdeb_lists -yqq 2>&1 >> /dev/null
+	export DEBIAN_FRONTEND=noninteractive
+elif [ $oo == "Ubuntu" ]; then
+apt-get install $packdubu_lists -yqq 2>&1 >> /dev/null
+	export DEBIAN_FRONTEND=noninteractive
+elif [ $oo  == "Rasbian" || "Fedora" || "CentOS" ]; then
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ Argggggg ......  System Warning! 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
+
+This server may not be supported due to having the incorrect OS detected!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+  sleep 2
+fi
+
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ PASSED Update the System - finish
