@@ -101,13 +101,13 @@ if [ $oo == "Debian" ]; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository non-free 2>&1 >> /dev/null
 	add-apt-repository contrib 2>&1 >> /dev/null
-
+	wget -qN https://raw.githubusercontent.com/MrDoobPG/Install/master/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
 elif [ $oo == "Ubuntu" ]; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository universe 2>&1 >> /dev/null
 	add-apt-repository restricted 2>&1 >> /dev/null
 	add-apt-repository multiverse 2>&1 >> /dev/null
-        apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
+    apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
 
 elif [ $oo  == "Rasbian" || "Fedora" || "CentOS" ]; then
 
