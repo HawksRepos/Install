@@ -110,7 +110,6 @@ elif [ $oo == "Ubuntu" ]; then
 	add-apt-repository restricted 2>&1 >> /dev/null
 	add-apt-repository multiverse 2>&1 >> /dev/null
     apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
-
 elif [ $oo  == "Rasbian" || "Fedora" || "CentOS" ]; then
 
 
@@ -147,13 +146,13 @@ if [ $oo == "Debian" ]; then
 	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 apt-get update -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
-apt-get install $packdeb_lists -yqq 2>&1 >> /dev/null
+apt-get install $packdeb_lits -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
 
 elif [ $oo == "Ubuntu" ]; then
     sudo add-apt-repository --yes --update ppa:ansible/ansible >> /dev/null
 	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" >> /etc/apt/sources.list
-apt-get install $packdubu_lists -yqq 2>&1 >> /dev/null
+apt-get install $packubu_lits -yqq 2>&1 >> /dev/null
 	export DEBIAN_FRONTEND=noninteractive
 elif [ $oo  == "Rasbian" || "Fedora" || "CentOS" ]; then
 tee <<-EOF
