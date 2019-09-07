@@ -118,7 +118,6 @@ Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
 This server may not be supported due to having the incorrect OS detected!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 EOF
   sleep 2
 fi
