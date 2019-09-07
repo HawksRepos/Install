@@ -94,15 +94,15 @@ hostname=$(hostname -I | awk '{print $1}')
 
 # add repo
 touch /var/log/osname.log 
-echo $osname >> /var/log/osname.log
+echo lsb_release -si >> /var/log/osname.log
 oo=$(tail -n 1 /var/log/osname.og)
 
-if [[$oo == "Debian"]}; then
+if [ $oo == "Debian" }; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository non-free 2>&1 >> /dev/null
 	add-apt-repository contrib 2>&1 >> /dev/null
 	wget -qN https://raw.githubusercontent.com/MrDoobPG/Install/master/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
-elif [[$oo == "Ubuntu"]]; then
+elif [ $oo == "Ubuntu" ]; then
 	add-apt-repository main 2>&1 >> /dev/null
 	add-apt-repository universe 2>&1 >> /dev/null
 	add-apt-repository restricted 2>&1 >> /dev/null
