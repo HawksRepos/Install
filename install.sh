@@ -157,7 +157,7 @@ start=$(cat /var/plexguide/pg.pythonstart)
 stored=$(cat /var/plexguide/pg.pythonstart.stored)
 
 if [ "$start" != "$stored" ]; then
-    bash /opt/pgstage/pyansible.sh
+    bash /opt/pgstage/pyansible.sh 1>/dev/null 2>&1
 fi
 echo "51" >/var/plexguide/pg.pythonstart.stored
 
