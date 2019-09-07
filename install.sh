@@ -176,8 +176,7 @@ tee <<-EOF
 EOF
 sleep 2
 
-file="/bin/pts"
-if [ ! -e "$file" ]; then
+if [ ! -e "/bin/pts" ]; then
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -206,7 +205,7 @@ EOF
 rm -rf /var/plexguide/new.install 1>/dev/null 2>&1
 sleep 2
 
-var="/bin/plexguide /bin/pts /bin/pgblitz /bin/ptsadd"
+var="/bin/plexguide /bin/pts /bin/pgblitz /bin/ptsadd /bin/ptsupdate"
 chmod +x $var
 chown 1000:1000 $var
 
