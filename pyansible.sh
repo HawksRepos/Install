@@ -26,6 +26,14 @@ python -m pip install --disable-pip-version-check --upgrade --force-reinstall \
   lxml
 python -m pip install --disable-pip-version-check --upgrade --force-reinstall ansible==${1-2.8.2}
 
+	pip install -U --force-reinstall pip==9.0.3
+	pip3 install -U --force-reinstall pip==9.0.3
+	pip install --upgrade --force-reinstall pip==9.0.3
+	pip install PyYAML --disable-pip-version-check
+	pip install --upgrade pip
+	pip install docker-py --ignore-installed PyYAML
+
+
 ## Copy pip to /usr/bin
 cp /usr/local/bin/pip /usr/bin/pip
 cp /usr/local/bin/pip3 /usr/bin/pip3
