@@ -7,8 +7,8 @@
 ################################################################################
 #function
 logfile=/var/log/log-install.txt
-package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible"
-##fast change the editions
+package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible cowsay fortune"
+##fast change the editions 
 edition=master
 ##fast change the editions
 
