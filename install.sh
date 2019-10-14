@@ -7,7 +7,7 @@
 ################################################################################
 #function
 logfile=/var/log/log-install.txt
-package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible cowsay fortune"
+package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible cowsay fortune intel-gpu-tools"
 ##fast change the editions 
 edition=master
 ##fast change the editions
@@ -106,7 +106,7 @@ elif [ $oo == "Ubuntu" ]; then
 	add-apt-repository universe 2>&1 >> /dev/null
 	add-apt-repository restricted 2>&1 >> /dev/null
 	add-apt-repository multiverse 2>&1 >> /dev/null
-    apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
+        apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
 elif [ $oo  == "Rasbian" || "Fedora" || "CentOS" ]; then
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
