@@ -27,7 +27,7 @@ We don't want to make money or an big ego, so go away or hate me ^^
 		│ Davaz, Deiteq, FlickerRate,         │
 		│ ClownFused, MrDoob, Sub7Seven,      │
 		│ TimeKills, The_Creator, Desimaniac, │
-		│ l3uddz, RXWatcher,Calmcacli, Porkie │
+		│ l3uddz, RXWatcher,Calmcacil, Porkie │
 		│                                     │
 		│ and all other guys                  │
 		│                                     │
