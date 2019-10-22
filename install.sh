@@ -7,7 +7,7 @@
 ################################################################################
 #function
 logfile=/var/log/log-install.txt
-package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible cowsay fortune intel-gpu-tools"
+package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible fortune intel-gpu-tools"
 ##fast change the editions 
 edition=master
 ##fast change the editions
