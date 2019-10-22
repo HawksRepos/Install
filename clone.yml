@@ -14,3 +14,4 @@
         dest: /opt/plexguide
         version: 'master'
         force: yes
+      ignore_errors: yes

@@ -8,9 +8,6 @@
 #function
 logfile=/var/log/log-install.txt
 package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible fortune intel-gpu-tools"
-##fast change the editions 
-edition=master
-##fast change the editions
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -47,25 +44,25 @@ if [ "$(id -u)" != "0" ]; then
 	echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && exit 1
 fi
 ##check for open port ( apache and Nginx test )
-apt-get install lsof -yqq 2>&1 >> /dev/null
+apt-get install lsof -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛  Check for existing Webserver is running - Standby
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-if lsof -Pi :80 -sTCP:LISTEN -t >/dev/null ; then
-        service apache2 stop 2>&1 >> /dev/null
-        service nginx stop 2>&1 >> /dev/null
-        apt-get purge apache nginx -yqq 2>&1 >> /dev/null
-        apt-get autoremove -yqq 2>&1 >> /dev/null
-        apt-get autoclean -yqq 2>&1 >> /dev/null
-elif lsof -Pi :443 -sTCP:LISTEN -t >/dev/null ; then
-        service apache2 stop 2>&1 >> /dev/null
-        service nginx stop 2>&1 >> /dev/null
-        apt-get purge apache nginx -yqq 2>&1 >> /dev/null
-        apt-get autoremove -yqq 2>&1 >> /dev/null
-        apt-get autoclean -yqq 2>&1 >> /dev/null
+if lsof -Pi :80 -sTCP:LISTEN -t >/dev/null 2>&1 ; then
+        service apache2 stop >/dev/null 2>&1
+        service nginx stop >/dev/null 2>&1
+        apt-get purge apache nginx -yqq >/dev/null 2>&1
+        apt-get autoremove -yqq >/dev/null 2>&1
+        apt-get autoclean -yqq >/dev/null 2>&1
+elif lsof -Pi :443 -sTCP:LISTEN -t >/dev/null 2>&1 ; then
+        service apache2 stop >/dev/null 2>&1
+        service nginx stop >/dev/null 2>&1
+        apt-get purge apache nginx -yqq >/dev/null 2>&1
+        apt-get autoremove -yqq >/dev/null 2>&1
+        apt-get autoclean -yqq >/dev/null 2>&1
 else
         echo "Good no service runs on port 80 & 443"
 fi
@@ -80,9 +77,9 @@ tee <<-EOF
 ⌛  Base install - Standby  || this can take some minutes
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-apt-get install lsb-release -yqq 2>&1 >> /dev/null
+apt-get install lsb-release -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
-apt-get install software-properties-common -yqq 2>&1 >> /dev/null
+apt-get install software-properties-common -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
 
 fullrel=$(lsb_release -sd)
@@ -97,15 +94,15 @@ echo $osname >> /var/log/osname.log
 oo=$(tail -n 1 /var/log/osname.log)
 
 if [ $oo == "Debian" ]; then
-	add-apt-repository main 2>&1 >> /dev/null
-	add-apt-repository non-free 2>&1 >> /dev/null
-	add-apt-repository contrib 2>&1 >> /dev/null
+	add-apt-repository main >/dev/null 2>&1
+	add-apt-repository non-free >/dev/null 2>&1
+	add-apt-repository contrib >/dev/null 2>&1
 	wget -qN https://raw.githubusercontent.com/MrDoobPG/Install/master/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
 elif [ $oo == "Ubuntu" ]; then
-	add-apt-repository main 2>&1 >> /dev/null
-	add-apt-repository universe 2>&1 >> /dev/null
-	add-apt-repository restricted 2>&1 >> /dev/null
-	add-apt-repository multiverse 2>&1 >> /dev/null
+	add-apt-repository main >/dev/null 2>&1
+	add-apt-repository universe >/dev/null 2>&1
+	add-apt-repository restricted >/dev/null 2>&1
+	add-apt-repository multiverse >/dev/null 2>&1
         apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
 elif [ $oo  == "Rasbian" || "Fedora" || "CentOS" ]; then
 tee <<-EOF
@@ -121,15 +118,15 @@ This server may not be supported due to having the incorrect OS detected!
 EOF
   sleep 2
 fi
-apt-get update -yqq 2>&1 >> /dev/null
+apt-get update -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
-apt-get upgrade -yqq 2>&1 >> /dev/null
+apt-get upgrade -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
-apt-get dist-upgrade -yqq 2>&1 >> /dev/null
+apt-get dist-upgrade -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
-apt-get autoremove -yqq 2>&1 >> /dev/null
+apt-get autoremove -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
-apt-get install $package_list -yqq 2>&1 >> /dev/null
+apt-get install $package_list -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
 
 tee <<-EOF
@@ -142,8 +139,11 @@ sleep 5
 # Delete If it Exist for Cloning
 if [ -e "/opt/plexguide" ]; then rm -rf /opt/plexguide; fi
 if [ -e "/opt/pgstage" ]; then rm -rf /opt/pgstage; fi
-rm -rf /opt/pgstage/place.holder 2>&1 >> /dev/null
+rm -rf /opt/pgstage/place.holder >/dev/null 2>&1
 
+##fast change the editions 
+edition=master
+##fast change the editions
 git clone -b $edition --single-branch https://github.com/MrDoobPG/Install.git /opt/pgstage 1>/dev/null 2>&1
 
 mkdir -p /var/plexguide/logs
@@ -159,18 +159,12 @@ fi
 echo "51" >/var/plexguide/pg.pythonstart.stored
 
 #pip upgrade
-pip install --upgrade pip 2>&1 >> /dev/null
+pip install --upgrade pip >/dev/null 2>&1
 echo "PIP updated"
 
-#ansible-playbook /opt/pgstage/clone.yml 2>&1 >> /dev/null
-#pts="/opt/plexguide/menu/alias/templates"
-#cp -rt /bin $pts/*
-#execute some basic playbooks 
-
-ansible-playbook /opt/pgstage/clone.yml 2>&1 >> /dev/null
+ansible-playbook /opt/pgstage/clone.yml
 ansible-playbook /opt/plexguide/menu/alias/alias.yml
-ansible-playbook /opt/plexguide/menu/pg.yml --tags journal
-ansible-playbook /opt/plexguide/menu/pg.yml --tags system
+ansible-playbook /opt/plexguide/menu/pg.yml --tags journal,system
 ansible-playbook /opt/plexguide/menu/motd/motd.yml
 ansible-playbook /opt/pgstage/folders/folder.yml
 
@@ -209,18 +203,6 @@ tee <<-EOF
 EOF
 rm -rf /var/plexguide/new.install 1>/dev/null 2>&1
 sleep 2
-
-
-#var="/bin/plexguide /bin/pts /bin/pgblitz /bin/ptsadd /bin/ptsupdate"
-#chmod +x $var
-#chown 1000:1000 $var
-
-## Other Folders
-#mkdir -p /opt/appdata/plexguide
-#mkdir -p /var/plexguide
-
-#ansible-playbook /opt/plexguide/menu/installer/folders.yml
-
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

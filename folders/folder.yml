@@ -16,4 +16,5 @@
         - '/opt/communityapps'
         - '/opt/coreapps'
         - '/var/plexguide'
+        - '/opt/pgstage'
       ignore_errors: yes
