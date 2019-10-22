@@ -162,9 +162,17 @@ echo "51" >/var/plexguide/pg.pythonstart.stored
 pip install --upgrade pip 2>&1 >> /dev/null
 echo "PIP updated"
 
+#ansible-playbook /opt/pgstage/clone.yml 2>&1 >> /dev/null
+#pts="/opt/plexguide/menu/alias/templates"
+#cp -rt /bin $pts/*
+#execute some basic playbooks 
+
 ansible-playbook /opt/pgstage/clone.yml 2>&1 >> /dev/null
-pts="/opt/plexguide/menu/alias/templates"
-cp -rt /bin $pts/*
+ansible-playbook /opt/plexguide/menu/alias/alias.yml
+ansible-playbook /opt/plexguide/menu/pg.yml --tags journal
+ansible-playbook /opt/plexguide/menu/pg.yml --tags system
+ansible-playbook /opt/plexguide/menu/motd/motd.yml
+ansible-playbook /opt/pgstage/folders/folder.yml
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -202,13 +210,17 @@ EOF
 rm -rf /var/plexguide/new.install 1>/dev/null 2>&1
 sleep 2
 
-var="/bin/plexguide /bin/pts /bin/pgblitz /bin/ptsadd /bin/ptsupdate"
-chmod +x $var
-chown 1000:1000 $var
+
+#var="/bin/plexguide /bin/pts /bin/pgblitz /bin/ptsadd /bin/ptsupdate"
+#chmod +x $var
+#chown 1000:1000 $var
 
 ## Other Folders
-mkdir -p /opt/appdata/plexguide
-mkdir -p /var/plexguide
+#mkdir -p /opt/appdata/plexguide
+#mkdir -p /var/plexguide
+
+#ansible-playbook /opt/plexguide/menu/installer/folders.yml
+
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
