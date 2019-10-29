@@ -10,7 +10,7 @@
   tasks:
     - name: Cloning PTS - From Installer
       git:
-        repo: 'https://github.com/MrDoobPG/PGBlitz.com'
+        repo: 'https://github.com/PTS-Team/PGBlitz.com'
         dest: /opt/plexguide
         version: 'master'
         force: yes

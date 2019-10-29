@@ -29,7 +29,7 @@ If you have an encrypted drive and have forgotten, not documented or not backed 
 
 Type or paste the following to backup your keys:
 ```
-sudo wget -N https://raw.githubusercontent.com/MrDoobPG/PGClone/dev/functions/backup-keys.sh
+sudo wget -N https://raw.githubusercontent.com/PTS-Team/PGClone/dev/functions/backup-keys.sh
 ```  
   
     
@@ -46,7 +46,7 @@ Type or paste the following to install PTS fork:
 sudo rm -rf /opt/plexguide 
 sudo rm -rf /var/plexguide 
 sudo apt-get install wget -y 
-sudo wget -qO - https://raw.githubusercontent.com/MrDoobPG/Install/master/install.sh | sudo bash
+sudo wget -qO - https://raw.githubusercontent.com/PTS-Team/Install/master/install.sh | sudo bash
 
 ```
   
@@ -60,7 +60,7 @@ The installation will then take you through the setup which is self-explanatory.
 Type or paste the following:
  
 ```
-sudo rm -rf /opt/plexguide && sudo rm -rf /var/plexguide && sudo apt-get install wget -y && sudo wget -qO - https://raw.githubusercontent.com/MrDoobPG/Install/master/install.sh | sudo bash
+sudo rm -rf /opt/plexguide && sudo rm -rf /var/plexguide && sudo apt-get install wget -y && sudo wget -qO - https://raw.githubusercontent.com/PTS-Team/Install/master/install.sh | sudo bash
 
 ```  
   
@@ -115,8 +115,8 @@ PTS  is a **fork ** of PGBlitz / Plexguide, an all-in-one media solution that de
 
 # 5. Recommended Reading
 
-[**[Click Here]**](https://github.com/MrDoobPG/PGBlitz.com/wiki/Pre-Reading) to view the list!
+[**[Click Here]**](https://github.com/PTS-Team/PGBlitz.com/wiki/Pre-Reading) to view the list!
 
 ## 6. Having Issues?
 
-[**[Click Here]**](https://github.com/MrDoobPG/PGBlitz.com/wiki/Common-Issues) for more information!
+[**[Click Here]**](https://github.com/PTS-Team/PGBlitz.com/wiki/Common-Issues) for more information!

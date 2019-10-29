@@ -97,7 +97,7 @@ if [ $oo == "Debian" ]; then
 	add-apt-repository main >/dev/null 2>&1
 	add-apt-repository non-free >/dev/null 2>&1
 	add-apt-repository contrib >/dev/null 2>&1
-	wget -qN https://raw.githubusercontent.com/MrDoobPG/Install/master/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
+	wget -qN https://raw.githubusercontent.com/PTS-Team/Install/master/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
 elif [ $oo == "Ubuntu" ]; then
 	add-apt-repository main >/dev/null 2>&1
 	add-apt-repository universe >/dev/null 2>&1
@@ -144,7 +144,7 @@ rm -rf /opt/pgstage/place.holder >/dev/null 2>&1
 ##fast change the editions 
 edition=master
 ##fast change the editions
-git clone -b $edition --single-branch https://github.com/MrDoobPG/Install.git /opt/pgstage 1>/dev/null 2>&1
+git clone -b $edition --single-branch https://github.com/PTS-Team/Install.git /opt/pgstage 1>/dev/null 2>&1
 
 mkdir -p /var/plexguide/logs
 echo "" >/var/plexguide/server.ports
