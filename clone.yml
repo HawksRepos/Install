@@ -12,6 +12,16 @@
       git:
         repo: 'https://github.com/PTS-Team/PTS-Team'
         dest: /opt/plexguide
-        version: 'master'
+        clone: yes
+        version: master
         force: yes
+        update: yes
+      become: yes
       ignore_errors: yes
+
+    - stat:
+        path: /opt/plexguide
+      register: p
+    - debug:
+        msg: "Path exists and is a directory"
+      when: p.stat.isdir is defined and p.stat.isdir
