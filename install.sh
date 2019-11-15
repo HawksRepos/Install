@@ -7,7 +7,7 @@
 ################################################################################
 #function
 logfile=/var/log/log-install.txt
-package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible fortune intel-gpu-tools python-apt"
+package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible fortune intel-gpu-tools python-apt lolcat"
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -15,7 +15,8 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 By installing, you agreeing to the terms and conditions of the GNUv3 License!
 
-We don't want to make money or an big ego, so go away or hate me ^^
+Everyone is welcome and everyone can help make it better,
+ so we like to greet you as a new / old user
 
 		┌─────────────────────────────────────┐
 		│                                     │
@@ -200,9 +201,15 @@ We are doing this to ensure that your installation continues to work!
 EOF
 exit
 fi
+
+chk=$(figlet PTS | lolcat )
 tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅️ PASSED! The PTS Command Installed!
+$chk
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅️ PASSED! The PTS is now Installed!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ PASSED ! Operations System    : $(lsb_release -sd)
 ✅ PASSED ! Processor            : $(lshw -class processor | grep "product" | awk '{print $2,$3,$4,$5,$6,$7,$8,$9}')
