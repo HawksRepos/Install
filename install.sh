@@ -63,9 +63,7 @@ elif lsof -Pi :443 -sTCP:LISTEN -t >/dev/null 2>&1 ; then
         apt-get purge apache nginx -yqq >/dev/null 2>&1
         apt-get autoremove -yqq >/dev/null 2>&1
         apt-get autoclean -yqq >/dev/null 2>&1
-else
-        echo "Good no service runs on port 80 & 443"
-fi
+else echo "" ; fi
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ PASSED ! Check for existing Webserver is done !
@@ -98,17 +96,13 @@ This server may not be supported due to having the incorrect OS detected!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  exit 1
-  else
-    echo "18"  >${abc}/os.version.check; 
-  fi
+  exit 0
+  else echo "" ; fi
 
 # add repo
 touch /var/log/osname.log 
 echo $osname >>/var/log/osname.log
 oo=$(tail -n 1 /var/log/osname.log)
-
-
 
 if [ $(lsb_release -si) == "Debian" ]; then
 	add-apt-repository main >/dev/null 2>&1
