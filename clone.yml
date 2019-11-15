@@ -17,8 +17,8 @@
 
     - name: 'Cloning PTS Install files'
       git:
-        repo: 'https://github.com/PTS-Team/Install'
-        dest: '/opt/pgstage'
+        repo: 'https://github.com/PTS-Team/PTS-Team'
+        dest: /opt/plexguide
         clone: yes
         version: 'master'
         force: yes
