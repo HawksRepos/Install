@@ -1,7 +1,7 @@
 #!/bin/bash
 ###############################################################################
 # Title: PTS Base installer
-# Coder : 	MrDoob - freelance Coder | ammj93 | prodengineer pr00f
+# Coder : 	MrDoob PTS Main Developer
 # GNU: General Public License v3.0E
 #
 ################################################################################
