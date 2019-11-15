@@ -182,7 +182,7 @@ echo "PIP updated"
 
 ansible-playbook /opt/pgstage/clone.yml
 ansible-playbook /opt/plexguide/menu/alias/alias.yml
-ansible-playbook /opt/plexguide/menu/pg.yml --tags journal,system
+ansible-playbook /opt/plexguide/menu/pg.yml --tags journal,system,rcloneinstall,mergerfsinstall
 ansible-playbook /opt/plexguide/menu/motd/motd.yml
 ansible-playbook /opt/pgstage/folders/folder.yml
 
