@@ -82,30 +82,12 @@ apt-get install lsb-release -yqq >/dev/null 2>&1
 apt-get install software-properties-common -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
 
-fullrel=$(lsb_release -sd)
 osname=$(lsb_release -si)
-relno=$(lsb_release -sr)
-relno=$(printf "%.0f\n" "$relno")
 hostname=$(hostname -I | awk '{print $1}')
 
-# add repo
-touch /var/log/osname.log 
-echo $osname >> /var/log/osname.log
-oo=$(tail -n 1 /var/log/osname.log)
-
-if [ $oo == "Debian" ]; then
-	add-apt-repository main >/dev/null 2>&1
-	add-apt-repository non-free >/dev/null 2>&1
-	add-apt-repository contrib >/dev/null 2>&1
-	wget -qN https://raw.githubusercontent.com/PTS-Team/Install/master/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
-elif [ $oo == "Ubuntu" ]; then
-	add-apt-repository main >/dev/null 2>&1
-	add-apt-repository universe >/dev/null 2>&1
-	add-apt-repository restricted >/dev/null 2>&1
-	add-apt-repository multiverse >/dev/null 2>&1
-        apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
-elif [ $oo  == "Rasbian" || "Fedora" || "CentOS" ]; then
-tee <<-EOF
+versioncheck=$(cat /etc/*-release | grep "Ubuntu" | grep -E '19')
+  if [ "$versioncheck" == "19" ]; then
+    tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔ Argggggg ......  System Warning! 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -116,6 +98,42 @@ This server may not be supported due to having the incorrect OS detected!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
+  exit 1
+  else
+    echo "18"  >${abc}/os.version.check; 
+  fi
+
+# add repo
+touch /var/log/osname.log 
+echo $osname >>/var/log/osname.log
+oo=$(tail -n 1 /var/log/osname.log)
+
+
+
+if [ $(lsb_release -si) == "Debian" ]; then
+	add-apt-repository main >/dev/null 2>&1
+	add-apt-repository non-free >/dev/null 2>&1
+	add-apt-repository contrib >/dev/null 2>&1
+	wget -qN https://raw.githubusercontent.com/PTS-Team/Install/master/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
+elif [ $(lsb_release -si) == "Ubuntu" ]; then
+	add-apt-repository main >/dev/null 2>&1
+	add-apt-repository universe >/dev/null 2>&1
+	add-apt-repository restricted >/dev/null 2>&1
+	add-apt-repository multiverse >/dev/null 2>&1
+    apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
+elif [ $oo == "Rasbian" || $oo =="Fedora" || $oo == "CentOS" ]; then
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ Argggggg ......  System Warning! 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.*
+
+This server may not be supported due to having the incorrect OS detected!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+  exit 1
   sleep 2
 fi
 apt-get update -yqq >/dev/null 2>&1
