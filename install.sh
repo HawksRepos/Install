@@ -115,7 +115,7 @@ elif [ $(lsb_release -si) == "Ubuntu" ]; then
 	add-apt-repository universe >/dev/null 2>&1
 	add-apt-repository restricted >/dev/null 2>&1
 	add-apt-repository multiverse >/dev/null 2>&1
-    apt-add-repository --yes --update ppa:ansible/ansible >> /dev/null
+        apt-add-repository --yes --update ppa:ansible/ansible >/dev/null 2>&1
 elif [ $oo == "Rasbian" || $oo =="Fedora" || $oo == "CentOS" ]; then
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
