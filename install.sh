@@ -131,6 +131,7 @@ EOF
   exit 1
   sleep 2
 fi
+
 apt-get update -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
 apt-get upgrade -yqq >/dev/null 2>&1
@@ -147,7 +148,6 @@ tee <<-EOF
 ✅ PASSED Update the System - finish
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-
 sleep 5
 
 # Delete If it Exist for Cloning
@@ -173,7 +173,7 @@ fi
 echo "51" >/var/plexguide/pg.pythonstart.stored
 
 #pip upgrade
-pip install --upgrade pip >/dev/null 2>&1
+pip install --upgrade pip 1>/dev/null 2>&1
 echo "PIP updated"
 
 ansible-playbook /opt/pgstage/folders/folder.yml
