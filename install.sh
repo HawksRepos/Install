@@ -141,12 +141,13 @@ apt-get autoremove -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
 apt-get install $package_list -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
-
+	
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ PASSED Update the System - finish
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
+
 sleep 5
 
 # Delete If it Exist for Cloning
