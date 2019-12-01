@@ -159,7 +159,7 @@ rm -rf /opt/pgstage/place.holder >/dev/null 2>&1
 edition=master
 ##fast change the editions
 git clone -b $edition --single-branch https://github.com/PTS-Team/Install.git /opt/pgstage 1>/dev/null 2>&1
-git clone --single-branch https://github.com/PTS-Team/Install.git /opt/ptsupdate 1>/dev/null 2>&1
+git clone --single-branch https://github.com/PTS-Team/PTS-Update.git /opt/ptsupdate 1>/dev/null 2>&1
 
 mkdir -p /var/plexguide/logs
 echo "" >/var/plexguide/server.ports
