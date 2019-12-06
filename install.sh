@@ -25,11 +25,14 @@ Everyone is welcome and everyone can help make it better,
 		│ Davaz, Deiteq, FlickerRate,         │
 		│ ClownFused, MrDoob, Sub7Seven,      │
 		│ TimeKills, The_Creator, Desimaniac, │
-		│ l3uddz, RXWatcher,Calmcacil, Porkie │
+		│ l3uddz, RXWatcher, Calmcacil,       │
+		│ ΔLPHΔ , Maikash , Porkie            │
+		│ CDN_RAGE , hawkinzzz , ΔLPHΔ        │
+		│ BugHunter : Krallenkiller           │
 		│                                     │
 		│ and all other guys                  │
 		│                                     │
-		│ @TheShadow you are welcome          │	
+		│ @TheShadow you are welcome          │
 		└─────────────────────────────────────┘
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
@@ -159,7 +162,7 @@ rm -rf /opt/pgstage/place.holder >/dev/null 2>&1
 edition=master
 ##fast change the editions
 git clone -b $edition --single-branch https://github.com/PTS-Team/Install.git /opt/pgstage 1>/dev/null 2>&1
-git clone --single-branch https://github.com/PTS-Team/PTS-Update.git /opt/ptsupdate 1>/dev/null 2>&1
+git clone https://github.com/PTS-Team/PTS-Update.git /opt/ptsupdate 1>/dev/null 2>&1
 
 mkdir -p /var/plexguide/logs
 echo "" >/var/plexguide/server.ports
@@ -183,15 +186,14 @@ ansible-playbook /opt/plexguide/menu/alias/alias.yml
 ansible-playbook /opt/plexguide/menu/motd/motd.yml
 ansible-playbook /opt/plexguide/menu/pg.yml --tags journal,system,rcloneinstall,mergerfsinstall
 
+
+if [ -e "/bin/pts" ]; then
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛  Verifiying PTS Install @ /bin/pts - Standby!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-sleep 2
-
-if [ ! -e "/bin/pts" ]; then
-
+else 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔️  WARNING! Installed Failed! PTS Installer Failed !
