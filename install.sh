@@ -27,7 +27,7 @@ Everyone is welcome and everyone can help make it better,
 		│ TimeKills, The_Creator, Desimaniac, │
 		│ l3uddz, RXWatcher, Calmcacil,       │
 		│ ΔLPHΔ , Maikash , Porkie            │
-		│ CDN_RAGE , hawkinzzz , ΔLPHΔ        │
+		│ CDN_RAGE , hawkinzzz                │
 		│ BugHunter : Krallenkiller           │
 		│                                     │
 		│ and all other guys                  │
