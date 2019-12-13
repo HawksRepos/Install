@@ -14,7 +14,9 @@
         - '/opt/appdata/plexguide'
         - '/opt/appdata/plexguide/emergency'
         - '/opt/communityapps'
+        - '/opt/mycontainers'
         - '/opt/coreapps'
         - '/var/plexguide'
         - '/opt/pgstage'
+        - '/opt/ptsupdate'
       ignore_errors: yes
