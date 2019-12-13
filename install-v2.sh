@@ -127,10 +127,6 @@ badinput1() {
   overwrittingpg
 }
 
-fexpg () {
-sudo docker 
-
-
 ###################################
 
 base() {
