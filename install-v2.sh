@@ -42,11 +42,11 @@ printf '
 }
 
 nopg() {
- base && repo && packlist && editionpts && value && ending
+ base && repo && packlist && editionpts && value && endingnonexist
 }
 
 ovpgex() {
- backupex && base && repo && packlist && editionpts && value && ending
+ backupex && base && repo && packlist && editionpts && value && endingexist
 }
 
 nope() {
@@ -165,9 +165,6 @@ printf '
 ⌛  Base install - Standby  || this can take some minutes
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
-osname=$(lsb_release -si)
-hostname=$(hostname -I | awk '{print $1}')
-
 versioncheck=$(cat /etc/*-release | grep "Ubuntu" | grep -E '19')
   if [ "$versioncheck" == "19" ]; then
       printf '
@@ -297,7 +294,7 @@ Please wait one moment, while PTS now checks and set everything up for you!
 fi
 }
 
-ending() {
+endingnonexist() {
 logfile=/var/log/log-install.txt
 chk=$(figlet "<<< P T S - TEAM >>>" | lolcat)
 touch /var/plexguide/new.install 
@@ -313,25 +310,42 @@ $chk
 ✅ PASSED ! Operations System    : $(lsb_release -sd)
 ✅ PASSED ! Processor            : $(lshw -class processor | grep "product" | awk '{print $2,$3,$4,$5,$6,$7,$8,$9}')
 ✅ PASSED ! CPUs                 : $(lscpu | grep "CPU(s):" | tail +1 | head -1 | awk  '{print $2}')
-✅ PASSED ! IP from Server       : $hostname
+✅ PASSED ! IP from Server       : $(hostname -I | awk '{print $1}')
 ✅ PASSED ! HDD Space            : $(df -h / --total --local -x tmpfs | grep 'total' | awk '{print $2}')
 ✅ PASSED ! RAM Space            : $(free -m | grep Mem | awk 'NR=1 {print $2}') MB
 ✅ PASSED ! Logfile              : $logfile
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-
 printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 ↘️  Start AnyTime By Typing >>> pts [or] plexguide [or] pgblitz
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 ↘️  Want to add an USER with UID 1000 type
 ↘️  ptsadd
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+'
+}
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅️ PASSED ! PTS-Team is now Installed!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ PASSED ! Operations System    : $(lsb_release -sd)
+✅ PASSED ! Processor            : $(lshw -class processor | grep "product" | awk '{print $2,$3,$4,$5,$6,$7,$8,$9}')
+✅ PASSED ! CPUs                 : $(lscpu | grep "CPU(s):" | tail +1 | head -1 | awk  '{print $2}')
+✅ PASSED ! IP from Server       : $(hostname -I | awk '{print $1}')
+✅ PASSED ! HDD Space            : $(df -h / --total --local -x tmpfs | grep 'total' | awk '{print $2}')
+✅ PASSED ! RAM Space            : $(free -m | grep Mem | awk 'NR=1 {print $2}') MB
+✅ PASSED ! PG/PTS Backup        : /var/backup-pg/
+✅ PASSED ! Logfile              : $logfile
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+printf '
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+↘️  Start AnyTime By Typing >>> pts [or] plexguide [or] pgblitz
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+↘️  Want to add an USER with UID 1000 type
+↘️  ptsadd
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
 echo ""
 }
