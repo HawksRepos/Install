@@ -113,6 +113,7 @@ so we like to greet you as a new / old user
 		│                                     │
 		│ @TheShadow you are welcome          │
 		└─────────────────────────────────────┘
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
 sleep 0.5
@@ -186,8 +187,9 @@ This server may not be supported due to having the incorrect OS detected!
 ######################
 repo() {
 # add repo
+rm -f /var/log/osname.log 
 touch /var/log/osname.log 
-echo $(lsb_release -si) >>/var/log/osname.log
+echo -e "$(lsb_release -si)" >>/var/log/osname.log
 
 if [[ $(lsb_release -si) == "Debian" ]]; then
 	add-apt-repository main >/dev/null 2>&1
@@ -268,7 +270,7 @@ ansible-playbook /opt/pgstage/folders/folder.yml
 ansible-playbook /opt/pgstage/clone.yml
 ansible-playbook /opt/plexguide/menu/alias/alias.yml
 ansible-playbook /opt/plexguide/menu/motd/motd.yml
-ansible-playbook /opt/plexguide/menu/pg.yml --tags journal,system,rcloneinstall,mergerfsinstall
+ansible-playbook /opt/plexguide/menu/pg.yml --tags journal,system,rcloneinstall,mergerfsinstall,update
 }
 
 value() {
