@@ -91,6 +91,7 @@ ovpgex() {
 }
 
 nope() {
+ echo
   exit 0
 }
 
@@ -106,19 +107,17 @@ backupex () {
   tar --warning=no-file-changed --ignore-failed-read --absolute-names --warning=no-file-removed \
     -C /var/plexguide -cf /var/backup-pg/var-plexguide-old.tar.gz ./
 	
-	printfiles=$(ls -ah /var/backup-pg/ | grep -E 'plex')
-		tee <<-EOF
-		━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-		⌛ Backup existing PG / PTS installation
-		━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+printfiles=$(ls -ah /var/backup-pg/ | grep -E 'plex')
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⌛ Backup existing PG / PTS installation
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+We made a backup of an existing PG / PTS installation for you
 
-		we have made a backup of your existing PG / PTS installation for you
-
-        $printfiles
-
-		━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-		EOF
-	doneokay
+$printfiles
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+doneokay
 }
 
 badinput1() {
@@ -156,9 +155,7 @@ else echo "" ; fi
 ✅ PASSED ! Check for existing Webserver is done !
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
-sleep 5
-
-  printf '
+printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛  Base install - Standby  || this can take some minutes
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -218,7 +215,6 @@ This server may not be supported due to having the incorrect OS detected!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
   exit 0
-  sleep 2
 fi
 }
 ##############################
@@ -240,7 +236,6 @@ printf '
 ✅ PASSED Update the System - finish
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
-sleep 5
 } 
 
 editionpts() {
@@ -303,7 +298,7 @@ fi
 ending() {
 logfile=/var/log/log-install.txt
 chk=$(figlet "<<< P T S - TEAM >>>" | lolcat)
-
+touch /var/plexguide/new.install 
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -322,22 +317,21 @@ $chk
 ✅ PASSED ! Logfile              : $logfile
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-    touch /var/plexguide/new.install 
-	touch /tmp/program_var
-	printf '
+
+printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-	↘️  Start AnyTime By Typing >>> pts [or] plexguide [or] pgblitz
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-	↘️  Want to add an USER with UID 1000 type
-	↘️  ptsadd
+↘️  Start AnyTime By Typing >>> pts [or] plexguide [or] pgblitz
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-	'
+↘️  Want to add an USER with UID 1000 type
+↘️  ptsadd
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+'
+echo ""
  }
  
  #### function layout for order one by one
