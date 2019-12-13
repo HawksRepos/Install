@@ -368,7 +368,6 @@ printf '
 ↘️  Want to add an USER with UID 1000 then type ptsadd
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
-echo ""
   read -p '↘️  ptsadd or Press [ENTER]: ' typed </dev/tty
 
   case $typed in
@@ -410,7 +409,6 @@ printf '
 ↘️  Want to add an USER with UID 1000 then type ptsadd
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
-echo ""
   read -p '↘️  ptsadd or Press [ENTER]: ' typed </dev/tty
 
   case $typed in
