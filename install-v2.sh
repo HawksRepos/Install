@@ -50,16 +50,68 @@ if [ "$(id -u)" != "0" ]; then
 	echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && exit 1
 fi
 }
-##############################
+###################################
+existpg() {
+epgg=$(cat /var/plexguide/pg.number)
+
+  if [ ! -e "$epgg" ]; then 
+	overwrittingpg
+  else "" ; fi
+}
+
+overwrittingpg() {
+  printf '
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⌛ We found an existing PG/PTS installation
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ Y ] Yes, I want a clean PTS installation 
+
+[ N ] No, I want to keep my PG/PTS installation
+
+[ Z ] EXIT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+'
+  read -p '↘️  Type Y | N or Z | Press [ENTER]: ' typed </dev/tty
+
+  case $typed in
+    Y) ovpgex ;;
+	y) ovpgex ;;
+	N) nope ;;
+	n) nope ;;
+    z) exit 0 ;;
+    Z) exit 0 ;;
+    *) badinput1 ;;
+  esac
+}
+
+ovpgex() {
+ base && repo && packlist && editionpts && value && ending
+}
+
+nope() {
+ echo
+  read -p 'Confirm Info | PRESS [ENTER] ' typed </dev/tty
+  exit 0
+}
+
+badinput1() {
+  echo
+  read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed </dev/tty
+  overwrittingpg
+}
+
+###################################
+
 base() {
 ##check for open port ( apache and Nginx test )
 apt-get install lsof -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
-tee <<-EOF
+  printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛  Check for existing Webserver is running - Standby
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
+'
 if lsof -Pi :80 -sTCP:LISTEN -t >/dev/null 2>&1 ; then
         service apache2 stop >/dev/null 2>&1
         service nginx stop >/dev/null 2>&1
@@ -73,18 +125,18 @@ elif lsof -Pi :443 -sTCP:LISTEN -t >/dev/null 2>&1 ; then
         apt-get autoremove -yqq >/dev/null 2>&1
         apt-get autoclean -yqq >/dev/null 2>&1
 else echo "" ; fi
-tee <<-EOF
+  printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ PASSED ! Check for existing Webserver is done !
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
+'
 sleep 5
 
-tee <<-EOF
+  printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛  Base install - Standby  || this can take some minutes
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
+'
 apt-get install lsb-release -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
 apt-get install software-properties-common -yqq >/dev/null 2>&1
@@ -95,7 +147,7 @@ hostname=$(hostname -I | awk '{print $1}')
 
 versioncheck=$(cat /etc/*-release | grep "Ubuntu" | grep -E '19')
   if [ "$versioncheck" == "19" ]; then
-    tee <<-EOF
+      printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔ Argggggg ......  System Warning! 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -105,7 +157,7 @@ Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
 This server may not be supported due to having the incorrect OS detected!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
+'
   exit 0
   else echo "" ; fi
 }
@@ -218,25 +270,22 @@ Please wait one moment, while PTS now checks and set everything up for you!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
     read -p 'Confirm Info | PRESS [ENTER] ' typed </dev/tty
-	sudo rm -rf /opt/plexguide 1>/dev/null 2>&1
-	sudo git clone https://github.com/PTS-Team/PTS-Team.git /opt/plexguide 1>/dev/null 2>&1
-	sudo chown -cR 1000:1000 /opt/plexguide 1>/dev/null 2>&1
-	sudo chmod -cR 775 /opt/plexguide 1>/dev/null 2>&1
-	sudo ptsupdate
-	value && ending
+    sudocheck && base && repo && packlist && editionpts && value && ending
 fi
 }
 
 ending() {
 logfile=/var/log/log-install.txt
-chk=$(figlet "<<< P T S >>>" | lolcat)
+chk=$(figlet "<<< P T S - TEAM >>>" | lolcat)
 
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                                $chk
+
+$chk
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅️ PASSED! The PTS is now Installed!
+✅️ PASSED ! PTS-Team is now Installed!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ PASSED ! Operations System    : $(lsb_release -sd)
 ✅ PASSED ! Processor            : $(lshw -class processor | grep "product" | awk '{print $2,$3,$4,$5,$6,$7,$8,$9}')
@@ -247,30 +296,32 @@ tee <<-EOF
 ✅ PASSED ! Logfile              : $logfile
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-    touch /var/plexguide/new.install
-sleep 2
+    touch /var/plexguide/new.install 
+	touch /tmp/program_var
+	printf '
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-printf '
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	↘️  Start AnyTime By Typing >>> pts [or] plexguide [or] pgblitz
 
-↘️  Start AnyTime By Typing >>> pts [or] plexguide [or] pgblitz
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	↘️  Want to add an USER with UID 1000 type
+	↘️  ptsadd
 
-↘️  Want to add an USER with UID 1000 type
-↘️  ptsadd
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- '
+	'
+
  }
+ 
+ #### function layout for order one by one
  
  mainstart
  sudocheck
+ existpg
  base
  repo
  packlist
  editionpts
  value
  ending
- 
- 
