@@ -294,51 +294,6 @@ Please wait one moment, while PTS now checks and set everything up for you!
 fi
 }
 
-useraddto() {
-if [ $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}') ]; then
-        usermod -aG sudo $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
-        sudo usermod -s /bin/bash $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
-        sudo usermod -aG video $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
-        sudo usermod -aG docker $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        echo ""
-        echo " ✅ PASSED ! We found the user UID " $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
-        echo ""
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-   else
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        echo " ⌛ INFO ! "
-        echo " ⌛ INFO ! Only lowercase and dont empty parts"
-        echo " ⌛ INFO ! Enter a password (8+ chars)"
-        echo " ⌛ INFO ! "
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        echo ""
-        read -p "Enter username : " username
-        read -s -p "Enter password : " password
-        echo ""
-        egrep "^$username" /etc/passwd >/dev/null
-                pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
-                useradd -m -p $pass $username
-                usermod -aG sudo $username
-                sudo usermod -s /bin/bash $username
-                usermod -aG video $username
-				usermod -aG docker $username
-        echo ""
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        echo " ✅ PASSED ! User has been added to system!"
-        echo " ✅ PASSED ! Your Username : " $username
-        echo " ✅ PASSED ! Your Password : " $password
-        echo " ✅ PASSED ! "
-        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-fi
-tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-😂 What a Lame name: $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-exit 0
-}
-
 endingnonexist() {
 logfile=/var/log/log-install.txt
 chk=$(figlet "<<< P T S - TEAM >>>" | lolcat)
@@ -368,15 +323,7 @@ printf '
 ↘️  Want to add an USER with UID 1000 then type ptsadd
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
-  read -p '↘️  ptsadd or Press [ENTER]: ' typed </dev/tty
-
-  case $typed in
-  PTSADD) useraddto ;;
-  ptsadd) useraddto ;;
-  z) exit 0 ;;
-  Z) exit 0 ;;
-  *) exit 0 ;;
-  esac
+echo ""
 }
 
 endingexist() {
@@ -409,15 +356,7 @@ printf '
 ↘️  Want to add an USER with UID 1000 then type ptsadd
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
-  read -p '↘️  ptsadd or Press [ENTER]: ' typed </dev/tty
-
-  case $typed in
-  PTSADD) useraddto ;;
-  ptsadd) useraddto ;;
-  z) exit 0 ;;
-  Z) exit 0 ;;
-  *) exit 0 ;;
-  esac
+echo ""
 }
 
 ### INSTALLER FUNCTIONS END #####################################################
