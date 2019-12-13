@@ -189,7 +189,7 @@ repo() {
 # add repo
 rm -f /var/log/osname.log 
 touch /var/log/osname.log 
-echo -e "$(lsb_release -si)" >>/var/log/osname.log
+echo -e "$(lsb_release -si)" >/var/log/osname.log
 
 if [[ $(lsb_release -si) == "Debian" ]]; then
 	add-apt-repository main >/dev/null 2>&1
@@ -229,6 +229,8 @@ apt-get dist-upgrade -yqq >/dev/null 2>&1
 apt-get autoremove -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
 apt-get install $package_list -yqq >/dev/null 2>&1
+	export DEBIAN_FRONTEND=noninteractive
+apt-get purge unattended-upgrades -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
 	
 printf '
