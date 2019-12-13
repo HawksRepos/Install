@@ -5,62 +5,17 @@
 # GNU: General Public License v3.0E
 #
 ################################################################################
-#function
-##############################
-mainstart() {
-tee <<-EOF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌎  INSTALLING: PTS Notice
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-By installing, you agreeing to the terms and conditions of the GNUv3 License!
-
-Everyone is welcome and everyone can help make it better,
- so we like to greet you as a new / old user
-
-		┌─────────────────────────────────────┐
-		│                                     │
-		│ Thanks to:                          │
-		│                                     │
-		│ Davaz, Deiteq, FlickerRate,         │
-		│ ClownFused, MrDoob, Sub7Seven,      │
-		│ TimeKills, The_Creator, Desimaniac, │
-		│ l3uddz, RXWatcher, Calmcacil,       │
-		│ ΔLPHΔ , Maikash , Porkie            │
-		│ CDN_RAGE , hawkinzzz                │
-		│ BugHunter : Krallenkiller           │
-		│                                     │
-		│ and all other guys                  │
-		│                                     │
-		│ @TheShadow you are welcome          │
-		└─────────────────────────────────────┘
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-sleep 1
-}
-##############################
-sudocheck() {
-#check it is being run as root
-if [ "$(id -u)" != "0" ]; then
-  	echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	echo ""
-	echo " ⛔ Warning! "
-	echo " ⛔ Warning! insufficient permission "
-	echo " ⛔ Warning! "
-	echo ""
-	echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" && exit 1
-fi
-}
+### FUNCTIONS START #####################################################
 ###################################
 existpg() {
-epgg=$(cat /var/plexguide/pg.number)
-
-  if [ ! -e "$epgg" ]; then 
+file="/opt/plexguide/menu/pg.yml"
+  if [[ -f $file ]]; then
 	overwrittingpg
-  else "" ; fi
+  else nopg ; fi
 }
 
 overwrittingpg() {
-  printf '
+printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛ We found an existing PG/PTS installation
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -86,6 +41,10 @@ overwrittingpg() {
   esac
 }
 
+nopg() {
+ base && repo && packlist && editionpts && value && ending
+}
+
 ovpgex() {
  backupex && base && repo && packlist && editionpts && value && ending
 }
@@ -100,7 +59,7 @@ doneokay() {
   read -p 'Confirm Info | PRESS [ENTER] ' typed </dev/tty
 }
 
-backupex () {
+backupex() {
   mkdir -p /var/backup-pg/
   tar --warning=no-file-changed --ignore-failed-read --absolute-names --warning=no-file-removed \
     -C /opt/plexguide -cf /var/backup-pg/plexguide-old.tar.gz ./
@@ -125,12 +84,57 @@ badinput1() {
   read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed </dev/tty
   overwrittingpg
 }
+### FUNCTIONS END #####################################################
+### everything after this line belongs to the installer
+### INSTALLER FUNCTIONS START #####################################################
+mainstart() {
+printf '
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌎  INSTALLING: PTS Notice
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+By installing, you agreeing to the terms and conditions of the GNUv3 License!
 
-###################################
+Everyone is welcome and everyone can help make it better,
+so we like to greet you as a new / old user
+
+		┌─────────────────────────────────────┐
+		│                                     │
+		│ Thanks to:                          │
+		│                                     │
+		│ Davaz, Deiteq, FlickerRate,         │
+		│ ClownFused, MrDoob, Sub7Seven,      │
+		│ TimeKills, The_Creator, Desimaniac, │
+		│ l3uddz, RXWatcher, Calmcacil,       │
+		│ ΔLPHΔ , Maikash , Porkie            │
+		│ CDN_RAGE , hawkinzzz                │
+		│ BugHunter : Krallenkiller           │
+		│                                     │
+		│ and all other guys                  │
+		│                                     │
+		│ @TheShadow you are welcome          │
+		└─────────────────────────────────────┘
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+'
+sleep 0.5
+}
+
+##############################
+sudocheck() {
+  if [[ $EUID -ne 0 ]]; then
+printf '
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔️  You Must Execute as a SUDO USER (with sudo) or as ROOT!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+'
+    exit 0
+  fi
+}
 
 base() {
 ##check for open port ( apache and Nginx test )
-apt-get install lsof -yqq >/dev/null 2>&1
+base_list="lsof lsb-release software-properties-common"
+
+apt-get install $base_list -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
   printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -160,11 +164,6 @@ printf '
 ⌛  Base install - Standby  || this can take some minutes
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
-apt-get install lsb-release -yqq >/dev/null 2>&1
-	export DEBIAN_FRONTEND=noninteractive
-apt-get install software-properties-common -yqq >/dev/null 2>&1
-	export DEBIAN_FRONTEND=noninteractive
-
 osname=$(lsb_release -si)
 hostname=$(hostname -I | awk '{print $1}')
 
@@ -172,7 +171,7 @@ versioncheck=$(cat /etc/*-release | grep "Ubuntu" | grep -E '19')
   if [ "$versioncheck" == "19" ]; then
       printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ Argggggg ......  System Warning! 
+⛔ Argggggg ......  System OS Warning! 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
@@ -188,21 +187,20 @@ This server may not be supported due to having the incorrect OS detected!
 repo() {
 # add repo
 touch /var/log/osname.log 
-echo $osname >>/var/log/osname.log
-oo=$(tail -n 1 /var/log/osname.log)
+echo $(lsb_release -si) >>/var/log/osname.log
 
-if [ $(lsb_release -si) == "Debian" ]; then
+if [[ $(lsb_release -si) == "Debian" ]]; then
 	add-apt-repository main >/dev/null 2>&1
 	add-apt-repository non-free >/dev/null 2>&1
 	add-apt-repository contrib >/dev/null 2>&1
 	wget -qN https://raw.githubusercontent.com/PTS-Team/Install/master/source/ansible-debian-ansible.list /etc/apt/sources.list.d/
-elif [ $(lsb_release -si) == "Ubuntu" ]; then
+elif [[ $(lsb_release -si) == "Ubuntu" ]]; then
 	add-apt-repository main >/dev/null 2>&1
 	add-apt-repository universe >/dev/null 2>&1
 	add-apt-repository restricted >/dev/null 2>&1
 	add-apt-repository multiverse >/dev/null 2>&1
     apt-add-repository --yes --update ppa:ansible/ansible >/dev/null 2>&1
-elif [ $oo == "Rasbian" || $oo =="Fedora" || $oo == "CentOS" ]; then
+elif [[ $(lsb_release -si) == "Rasbian" || $(lsb_release -si) == "Fedora" || $(lsb_release -si) == "CentOS" ]]; then
 printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔ Argggggg ......  System Warning! 
@@ -332,16 +330,12 @@ printf '
 
 '
 echo ""
- }
- 
+}
+
+### INSTALLER FUNCTIONS END #####################################################
+
  #### function layout for order one by one
  
  mainstart
  sudocheck
  existpg
- base
- repo
- packlist
- editionpts
- value
- ending
