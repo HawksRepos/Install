@@ -13,14 +13,14 @@ _**Table of Contents**_
 
 # 1. Install
 
-## (i) Backup your current server using PG Vault before installing PTS.   
+## (i) Backup your current server using PTS Vault before installing PTS.   
   
 Your PTS backup can be used to restore your applications in PTS fork after install (see later)  
 **NOTE**  Tested and working for PG v8.5-8.7
   
 Type the following to access your current build's menu: `sudo pgblitz`    
-Select  `[7] PG vault [Backup & Restore]`  then  
-Select  `[1] Utlizie PG Vault`  then  
+Select  `[7] PTS vault [Backup & Restore]`  then  
+Select  `[1] Utlizie PTS Vault`  then  
 Select  `[1] Data Backup`  - At this stage you can either type `all` (to backup all apps) OR `appname` (to queue/stack apps which you would like to backup) followed by typing `A`.  
   
 
@@ -43,7 +43,7 @@ Once your server has an OS installed, login to your server using SSH.
 Type or paste the following to install PTS fork:  
 
 ```
-sudo rm -rf /opt/plexguide && sudo rm -rf /var/plexguide && sudo apt-get install wget -y && sudo wget -qO - https://raw.githubusercontent.com/PTS-Team/Install/master/install.sh | sudo bash
+sudo rm -rf /opt/plexguide && sudo rm -rf /var/plexguide && sudo apt-get install wget -y && sudo wget -qO- https://raw.githubusercontent.com/PTS-Team/Install/master/install.sh | sudo bash
 
 ```
   
@@ -57,7 +57,7 @@ The installation will then take you through the setup which is self-explanatory.
 Type or paste the following:
  
 ```
-sudo rm -rf /opt/plexguide && sudo rm -rf /var/plexguide && sudo apt-get install wget -y && sudo wget -qO - https://raw.githubusercontent.com/PTS-Team/Install/master/install.sh | sudo bash
+sudo rm -rf /opt/plexguide && sudo rm -rf /var/plexguide && sudo apt-get install wget -y && sudo wget -qO- https://raw.githubusercontent.com/PTS-Team/Install/master/install.sh | sudo bash
 
 ```  
   
@@ -68,7 +68,7 @@ After the install has completed, you will need to **rerun** the above command ag
   
 Configuring PTS fork is the same as configuring PG / PlexGuide.
   
-Type the following to run the PTS menu: `sudo pts`    
+Then type the following to run the PTS menu: `sudo pts`    
 
 * Set up and deploy Traefik ([see here](https://github.com/PTS-Team/PTS-Team/wiki/Traefik))   
 
@@ -94,7 +94,7 @@ PTS will create one download folder for completed downloads using any NZB client
   
 # 2. Project Statement
 
-PTS  is a **fork** of PG / Plexguide, an all-in-one media solution that deploys a Media Server through the use of either your local HDD or Google Drive; serving as unlimited back-end storage. PTS utilizes Ansible and Docker to streamline your Media Server while deploying multiple tools for your server operations.
+PTS  is a **fork ** of PG / Plexguide, an all-in-one media solution that deploys a Media Server through the use of either your local HDD or Google Drive; serving as unlimited back-end storage. PTS utilizes Ansible and Docker to streamline your Media Server while deploying multiple tools for your server operations.
  
 # 3. Functional Use
 
@@ -108,7 +108,7 @@ PTS  is a **fork** of PG / Plexguide, an all-in-one media solution that deploys 
 
 # 4. Testimonials
 
-
+..... 
 
 
 # 5. Recommended Reading
