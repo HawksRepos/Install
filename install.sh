@@ -131,7 +131,7 @@ This server may not be supported due to having the incorrect OS detected!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  exit 1
+  exit 0
   sleep 2
 fi
 
@@ -188,22 +188,27 @@ ansible-playbook /opt/plexguide/menu/pg.yml --tags journal,system,rcloneinstall,
 
 
 if [ -e "/bin/pts" ]; then
-tee <<-EOF
+printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛  Verifiying PTS Install @ /bin/pts - Standby!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-else 
-tee <<-EOF
+'
+else
+printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔️  WARNING! Installed Failed! PTS Installer Failed !
+⛔  WARNING! Installed Failed! PTS Installer Failed !
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Please reinstall PTS by running the Command Again! 
+We are happy to do this for you again automatically
 We are doing this to ensure that your installation continues to work!
-
+Please wait one moment, while PTS now checks and set everything up for you!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-exit
+'
+    read -p 'Confirm Info | PRESS [ENTER] ' typed </dev/tty
+	sudo rm -rf /opt/plexguide
+	sudo git clone https://github.com/PTS-Team/PTS-Team.git /opt/plexguide
+	sudo chown -cR 1000:1000 /opt/plexguide
+	sudo chmod -cR 775 /opt/plexguide
+	sudo ptsupdate
 fi
 
 chk=$(figlet "<<< P T S >>>" | lolcat)
@@ -224,10 +229,10 @@ tee <<-EOF
 ✅ PASSED ! Logfile              : $logfile
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-rm -rf /var/plexguide/new.install 1>/dev/null 2>&1
+touch /var/plexguide/new.install
 sleep 2
 
-tee <<-EOF
+printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ↘️  Start AnyTime By Typing >>> pts [or] plexguide [or] pgblitz
@@ -238,4 +243,5 @@ tee <<-EOF
 ↘️  ptsadd
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
+ '
+echo ""
