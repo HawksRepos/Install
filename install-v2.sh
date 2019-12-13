@@ -69,6 +69,7 @@ overwrittingpg() {
 
 [ N ] No, I want to keep my PG/PTS installation
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [ Z ] EXIT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
@@ -86,13 +87,38 @@ overwrittingpg() {
 }
 
 ovpgex() {
- base && repo && packlist && editionpts && value && ending
+ backupex && base && repo && packlist && editionpts && value && ending
 }
 
 nope() {
+  exit 0
+}
+
+doneokay() {
  echo
   read -p 'Confirm Info | PRESS [ENTER] ' typed </dev/tty
-  exit 0
+}
+
+backupex () {
+  mkdir -p /var/backup-pg/
+  tar --warning=no-file-changed --ignore-failed-read --absolute-names --warning=no-file-removed \
+    -C /opt/plexguide -cf /var/backup-pg/plexguide-old.tar.gz ./
+  tar --warning=no-file-changed --ignore-failed-read --absolute-names --warning=no-file-removed \
+    -C /var/plexguide -cf /var/backup-pg/var-plexguide-old.tar.gz ./
+	
+	printfiles=$(ls -ah /var/backup-pg/ | grep -E 'plex')
+		tee <<-EOF
+		━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+		⌛ Backup existing PG / PTS installation
+		━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+		we have made a backup of your existing PG / PTS installation for you
+
+        $printfiles
+
+		━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+		EOF
+	doneokay
 }
 
 badinput1() {
@@ -100,6 +126,10 @@ badinput1() {
   read -p '⛔️ ERROR - Bad Input! | Press [ENTER] ' typed </dev/tty
   overwrittingpg
 }
+
+fexpg () {
+sudo docker 
+
 
 ###################################
 
