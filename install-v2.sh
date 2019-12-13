@@ -295,7 +295,7 @@ fi
 }
 
 useraddto() {
-if [[ $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}') == "" ]]; then
+if [ $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}') ]; then
         usermod -aG sudo $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
         sudo usermod -s /bin/bash $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
         sudo usermod -aG video $(grep "1000" /etc/passwd | cut -d: -f1 | awk '{print $1}')
