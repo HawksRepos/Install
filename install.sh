@@ -21,7 +21,7 @@ printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [ Y ] Yes, I want a clean PTS installation.
-     ( this create an backup from 2 folders )
+     ( this create a backup from 2 folders )
 
 [ N ] No, I want to keep my PG/PTS installation 
      ( this breaks the install )
