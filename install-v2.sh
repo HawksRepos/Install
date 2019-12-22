@@ -20,9 +20,11 @@ printf '
 ⌛ We found an existing PG/PTS installation
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-[ Y ] Yes, I want a clean PTS installation 
+[ Y ] Yes, I want a clean PTS installation.
+     ( this create a backup from 2 folders )
 
-[ N ] No, I want to keep my PG/PTS installation
+[ N ] No, I want to keep my PG/PTS installation 
+     ( this breaks the install )
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [ Z ] EXIT
