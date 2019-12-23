@@ -30,12 +30,13 @@ printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛ We found an existing PG/PTS installation
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+What would you like to do now? Select from the two option below.
 
-[ Y ] Yes, I want a clean PTS installation.
-     ( this create a backup from 2 folders )
+[ Y ] Yes, I want a clean PTS installation. (Recommended)
+( This will create a backup from 2 folders )
 
-[ N ] No, I want to keep my PG/PTS installation 
-     ( this breaks the install )
+[ N ] No, I want to keep my PG/PTS installation
+( This has known to cause a lot of problems with PTS. Can break PG and PTS. )
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [ Z ] EXIT
@@ -73,13 +74,13 @@ drivecheck() {
   if [[ "$leftover" -lt "50000000" ]]; then
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⌛ less then 50GB drive space
+⌛ WOAH! PTS noticed your current system has less then 50GB drive space !
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-We have recognized less than 50GB of storage space,
-this can lead to problems,
-please make sure that there is enough space available.
+We have recognized less than 50GB of storage space, this can lead to problems.
 
-You now carry out the installation at your own risk
+Please make sure that there is enough space available.
+
+Moving forward you're carry out this installation at your own risk.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 doneokay
@@ -97,13 +98,13 @@ backupex() {
     -C /opt/plexguide -cf /var/backup-pg/plexguide-old.tar.gz ./
   tar --warning=no-file-changed --ignore-failed-read --absolute-names --warning=no-file-removed \
     -C /var/plexguide -cf /var/backup-pg/var-plexguide-old.tar.gz ./
-	
+
 printfiles=$(ls -ah /var/backup-pg/ | grep -E 'plex')
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛ Backup existing PG / PTS installation
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-We made a backup of an existing PG / PTS installation for you
+PTS made a backup of an existing PG / PTS installation for you!
 
 $printfiles
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -117,7 +118,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛ Cleanup existing PG / PTS installation
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-we have now carried out a cleanup for different folders
+PTS has now carried out a cleanup for different needed folders!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 doneokay
@@ -136,7 +137,7 @@ printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🌎  INSTALLING: PTS Notice
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-By installing, you agreeing to the terms and conditions of the GNUv3 License!
+By installing, you're agreeing to the terms and conditions of the GNUv3 License!
 
 Everyone is welcome and everyone can help make it better,
 so we like to greet you as a new / old user
@@ -150,7 +151,7 @@ so we like to greet you as a new / old user
 		│ TimeKills, The_Creator, Desimaniac, │
 		│ l3uddz, RXWatcher, Calmcacil,       │
 		│ ΔLPHΔ , Maikash , Porkie            │
-		│ CDN_RAGE , hawkinzzz                │
+		│ CDN_RAGE , hawkinzzz , The_Deadpool │
 		│ BugHunter : Krallenkiller           │
 		│                                     │
 		│ and all other guys                  │
@@ -173,7 +174,7 @@ apt-get install $base_list -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
   printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⌛  Check for existing Webserver is running - Standby
+⌛ PTS is checking for existing active Webserver(s) - Standby
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
 if lsof -Pi :80 -sTCP:LISTEN -t >/dev/null 2>&1 ; then
@@ -191,19 +192,19 @@ elif lsof -Pi :443 -sTCP:LISTEN -t >/dev/null 2>&1 ; then
 else echo "" ; fi
   printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ PASSED ! Check for existing Webserver is done !
+✅ PASSED ! PTS check for existing Webserver(s) This is now completed !
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
 printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⌛  Base install - Standby  || this can take some minutes
+⌛  Base Install - Standby  || This may take a few minuets. Grab a Coffee!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
 versioncheck=$(cat /etc/*-release | grep "Ubuntu" | grep -E '19')
   if [ "$versioncheck" == "19" ]; then
       printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ Argggggg ......  System OS Warning! 
+⛔ WOAH! ......  System OS Warning!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
@@ -218,8 +219,8 @@ This server may not be supported due to having the incorrect OS detected!
 ######################
 repo() {
 # add repo
-rm -f /var/log/osname.log 
-touch /var/log/osname.log 
+rm -f /var/log/osname.log
+touch /var/log/osname.log
 echo -e "$(lsb_release -si)" >/var/log/osname.log
 
 if [[ $(lsb_release -si) == "Debian" ]]; then
@@ -236,7 +237,7 @@ elif [[ $(lsb_release -si) == "Ubuntu" ]]; then
 elif [[ $(lsb_release -si) == "Rasbian" || $(lsb_release -si) == "Fedora" || $(lsb_release -si) == "CentOS" ]]; then
 printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔ Argggggg ......  System Warning! 
+⛔ WOAH! ......  PTS System Warning!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.*
@@ -263,13 +264,13 @@ apt-get install $package_list -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
 apt-get purge unattended-upgrades -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
-	
+
 printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ PASSED Update the System - finish
+✅ PASSED - PTS finished updating your system!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
-} 
+}
 
 editionpts() {
 # Delete If it Exist for Cloning
@@ -279,7 +280,7 @@ if [[ -e "/var/plexguide" ]]; then rm -rf /var/plexguide; fi
 if [[ -e "/opt/ptsupdate" ]]; then rm -rf /opt/ptsudate; fi
 rm -rf /opt/pgstage/place.holder >/dev/null 2>&1
 
-##fast change the editions 
+##fast change the editions
 edition=master
 ##fast change the editions
 git clone -b $edition --single-branch https://github.com/PTS-Team/Install.git /opt/pgstage 1>/dev/null 2>&1
@@ -312,13 +313,13 @@ value() {
 if [ -e "/bin/pts" ]; then
 printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⌛  Verifiying PTS Install @ /bin/pts - Standby!
+⌛  PTS is now verifiying it's Install @ /bin/pts - Standby!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
 else
 printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔  WARNING! Installed Failed! PTS Installer Failed !
+⛔            WARNING! PTS Installer Failed!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 We are happy to do this for you again automatically
 We are doing this to ensure that your installation continues to work!
@@ -333,7 +334,7 @@ fi
 endingnonexist() {
 logfile=/var/log/log-install.txt
 chk=$(figlet "<<< P T S - TEAM >>>" | lolcat)
-touch /var/plexguide/new.install 
+touch /var/plexguide/new.install
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -354,9 +355,9 @@ $chk
 EOF
 printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-↘️  Start AnyTime By Typing >>> pts [or] plexguide [or] pgblitz
+↘️  Start AnyTime By Typing >>> sudo pts
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-↘️  Want to add an USER with UID 1000 then type ptsadd
+↘️  Want to add an USER with UID 1000 then type >>> sudo ptsadd
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
 echo ""
@@ -365,7 +366,7 @@ echo ""
 endingexist() {
 logfile=/var/log/log-install.txt
 chk=$(figlet "<<< P T S - TEAM >>>" | lolcat)
-touch /var/plexguide/new.install 
+touch /var/plexguide/new.install
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -387,9 +388,9 @@ $chk
 EOF
 printf '
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-↘️  Start AnyTime By Typing >>> pts [or] plexguide [or] pgblitz
+↘️  Start AnyTime By Typing >>> sudo pts
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-↘️  Want to add an USER with UID 1000 then type ptsadd
+↘️  Want to add an USER with UID 1000 then type >>> sudo ptsadd
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '
 echo ""
@@ -398,7 +399,7 @@ echo ""
 ### INSTALLER FUNCTIONS END #####################################################
 
  #### function layout for order one by one
- 
+
  mainstart
  sudocheck
  drivecheck
