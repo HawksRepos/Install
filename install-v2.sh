@@ -174,7 +174,7 @@ versioncheck=$(cat /etc/*-release | grep "Ubuntu" | grep -E '19')
 ⛔ Argggggg ......  System OS Warning! 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.* / 10
+Supported: UBUNTU 16.xx - 18.10 ~ LTS/SERVER and Debian 9.*
 
 This server may not be supported due to having the incorrect OS detected!
 
