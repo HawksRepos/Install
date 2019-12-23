@@ -67,6 +67,25 @@ nope() {
   exit 0
 }
 
+drivecheck() {
+  leftover=$(df / --local | tail -n +2 | awk '{print $4}')
+
+  if [[ "$leftover" -lt "50000000" ]]; then
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⌛ less then 50GB drive space
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+We have recognized less than 50GB of storage space,
+this can lead to problems,
+please make sure that there is enough space available.
+
+You now carry out the installation at your own risk
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+doneokay
+fi
+}
+
 doneokay() {
  echo
   read -p 'Confirm Info | PRESS [ENTER] ' typed </dev/tty
@@ -382,4 +401,5 @@ echo ""
  
  mainstart
  sudocheck
+ drivecheck
  existpg
