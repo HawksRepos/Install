@@ -79,6 +79,18 @@ $printfiles
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 doneokay
+if [[ -e "/opt/plexguide" ]]; then rm -rf /opt/plexguide; fi
+if [[ -e "/opt/pgstage" ]]; then rm -rf /opt/pgstage; fi
+if [[ -e "/var/plexguide" ]]; then rm -rf /var/plexguide; fi
+if [[ -e "/opt/ptsupdate" ]]; then rm -rf /opt/ptsudate; fi
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⌛ Cleanup existing PG / PTS installation
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+we have now carried out a cleanup for different folders
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+doneokay
 }
 
 badinput1() {
@@ -241,8 +253,10 @@ printf '
 
 editionpts() {
 # Delete If it Exist for Cloning
-if [ -e "/opt/plexguide" ]; then rm -rf /opt/plexguide; fi
-if [ -e "/opt/pgstage" ]; then rm -rf /opt/pgstage; fi
+if [[ -e "/opt/plexguide" ]]; then rm -rf /opt/plexguide; fi
+if [[ -e "/opt/pgstage" ]]; then rm -rf /opt/pgstage; fi
+if [[ -e "/var/plexguide" ]]; then rm -rf /var/plexguide; fi
+if [[ -e "/opt/ptsupdate" ]]; then rm -rf /opt/ptsudate; fi
 rm -rf /opt/pgstage/place.holder >/dev/null 2>&1
 
 ##fast change the editions 
