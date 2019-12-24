@@ -288,7 +288,7 @@ ansible-playbook /opt/plexguide/menu/pg.yml --tags journal,system,rcloneinstall,
 }
 
 value() {
-if [[ -e "/bin/pts" ]}; then
+if [[ -e "/bin/pts" ]]; then
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⌛  PTS is now verifiying it's Install @ /bin/pts - Standby!
