@@ -239,19 +239,25 @@ fi
 ##############################
 packlist() {
 package_list="curl wget software-properties-common git zip unzip dialog sudo nano htop mc lshw ansible fortune intel-gpu-tools python-apt lolcat figlet"
+echo -ne '                          (0%)\r'
 apt-get update -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
+echo -ne '#####                     (20%)\r'
 apt-get upgrade -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
 apt-get dist-upgrade -yqq >/dev/null 2>&1
+echo -ne '##########                (40%)\r'
 	export DEBIAN_FRONTEND=noninteractive
 apt-get autoremove -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
+echo -ne '#################         (60%)\r'
 apt-get install $package_list -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
+echo -ne '###################       (80%)\r'
 apt-get purge unattended-upgrades -yqq >/dev/null 2>&1
 	export DEBIAN_FRONTEND=noninteractive
-
+echo -ne '#######################   (100%)\r'
+echo -ne '\n'
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ PASSED - PTS finished updating your system!
@@ -260,24 +266,29 @@ EOF
 }
 
 editionpts() {
+echo -ne '                          (0%)\r'
 # Delete If it Exist for Cloning
 if [[ -e "/opt/plexguide" ]]; then rm -rf /opt/plexguide; fi
 if [[ -e "/opt/pgstage" ]]; then rm -rf /opt/pgstage; fi
 if [[ -e "/var/plexguide" ]]; then rm -rf /var/plexguide; fi
 if [[ -e "/opt/ptsupdate" ]]; then rm -rf /opt/ptsudate; fi
+echo -ne '#####                     (20%)\r'
 rm -rf /opt/pgstage/place.holder >/dev/null 2>&1
 ##fast change the editions
 edition=master
 ##fast change the editions
 git clone -b $edition --single-branch https://github.com/PTS-Team/Install.git /opt/pgstage 1>/dev/null 2>&1
 git clone https://github.com/PTS-Team/PTS-Update.git /opt/ptsupdate 1>/dev/null 2>&1
+echo -ne '##########                (40%)\r'
 mkdir -p /var/plexguide/logs
 echo "" >/var/plexguide/server.ports
 echo "51" >/var/plexguide/pg.pythonstart
 touch /var/plexguide/pg.pythonstart.stored
 start=$(cat /var/plexguide/pg.pythonstart)
 stored=$(cat /var/plexguide/pg.pythonstart.stored)
+echo -ne '#################         (60%)\r'
 if [[ "$start" != "$stored" ]]; then bash /opt/pgstage/pyansible.sh 1>/dev/null 2>&1; fi
+echo -ne '###################       (80%)\r'
 echo "51" >/var/plexguide/pg.pythonstart.stored
 pip install --upgrade pip 1>/dev/null 2>&1
 ansible-playbook /opt/pgstage/folders/folder.yml
@@ -285,6 +296,8 @@ ansible-playbook /opt/pgstage/clone.yml
 ansible-playbook /opt/plexguide/menu/alias/alias.yml
 ansible-playbook /opt/plexguide/menu/motd/motd.yml
 ansible-playbook /opt/plexguide/menu/pg.yml --tags journal,system,rcloneinstall,mergerfsinstall,update
+echo -ne '#######################   (100%)\r'
+echo -ne '\n'
 }
 
 value() {
