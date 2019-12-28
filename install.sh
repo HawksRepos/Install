@@ -85,7 +85,7 @@ doneokay() {
   read -p 'Confirm Info | PRESS [ENTER] ' typed </dev/tty
 }
 backupex() {
-  time=$(date '+%Y-%m-%d')
+  time=$(date +%Y-%m-%d-%H:%M:%S)
   mkdir -p /var/backup-pg/
   tar --warning=no-file-changed --ignore-failed-read --absolute-names --warning=no-file-removed \
     -C /opt/plexguide -cf /var/backup-pg/plexguide-old-"$time".tar.gz ./
