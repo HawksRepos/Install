@@ -44,9 +44,9 @@ EOF
 
   case $typed in
     Y) ovpgex ;;
-	y) ovpgex ;;
-	N) nope ;;
-	n) nope ;;
+    y) ovpgex ;;
+    N) nope ;;
+    n) nope ;;
     z) exit 0 ;;
     Z) exit 0 ;;
     *) badinput1 ;;
@@ -85,11 +85,12 @@ doneokay() {
   read -p 'Confirm Info | PRESS [ENTER] ' typed </dev/tty
 }
 backupex() {
+  time=$(date '+%Y-%m-%d')
   mkdir -p /var/backup-pg/
   tar --warning=no-file-changed --ignore-failed-read --absolute-names --warning=no-file-removed \
-    -C /opt/plexguide -cf /var/backup-pg/plexguide-old.tar.gz ./
+    -C /opt/plexguide -cf /var/backup-pg/plexguide-old-"$time".tar.gz ./
   tar --warning=no-file-changed --ignore-failed-read --absolute-names --warning=no-file-removed \
-    -C /var/plexguide -cf /var/backup-pg/var-plexguide-old.tar.gz ./
+    -C /var/plexguide -cf /var/backup-pg/var-plexguide-old-"$time".tar.gz ./
 
 printfiles=$(ls -ah /var/backup-pg/ | grep -E 'plex')
 tee <<-EOF
