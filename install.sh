@@ -301,7 +301,10 @@ echo -ne '####################       (80%)\r'
 ansible-playbook /opt/plexguide/menu/alias/alias.yml
 ansible-playbook /opt/plexguide/menu/motd/motd.yml
 echo -ne '######################     (90%)\r'
-ansible-playbook /opt/plexguide/menu/pg.yml --tags journal,system,rcloneinstall,mergerfsinstall,update
+ansible-playbook /opt/plexguide/menu/pg.yml --tags journal,system
+ansible-playbook /opt/plexguide/menu/pg.yml --tags rcloneinstall
+ansible-playbook /opt/plexguide/menu/pg.yml --tags mergerfsinstall
+ansible-playbook /opt/plexguide/menu/pg.yml --tags update
 echo -ne '#########################  (100%)\r'
 echo -ne '\n'
 }
