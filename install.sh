@@ -17,6 +17,27 @@ EOF
     exit 0
   fi
 }
+agreebase() {
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔️ READ THIS NOTE 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+The PTS team wishes to advise that in  installing PTS you accept the risk of 
+any data being transferred to your mounted Google Drive account being 
+removed by Google if you are illegally using an Education account 
+or not adhering to the Gsuite Business Terms of Service 
+by having less than 5 users. 
+
+We do not condone or support the use of education accounts specifically 
+and we can refuse support at our discretion
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+sleep 90
+doneokay
+}
+
 existpg() {
 file="/opt/plexguide/menu/pg.yml"
   if [[ -f $file ]]; then
