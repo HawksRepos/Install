@@ -40,3 +40,41 @@
         - '/opt/pgstage/.gitignore'
         - '/opt/pgstage/LICENSE'
         - '/opt/pgstage/README.md'
+
+    - name: Check if Image Variable Exists
+      stat:
+        path: '/opt/communityapps'
+      register: pathcheck
+
+    - name: 'Transfer Image Variable'
+      shell: 'rm -rf /opt/communityapps'
+      when: pathcheck.stat.exists
+
+    - name: Cloning Community Apps
+      git:
+        repo: 'https://github.com/PTS-Team/Apps-Community'
+        dest: /opt/communityapps
+        version: 'master'
+        force: yes
+
+    - name: Set Permission and Owner 
+      shell: 'chown -R 1000:1000 /opt/communityapps && chmod -R 775 /opt/communityapps'
+
+    - name: Check if Image Variable Exists
+      stat:
+        path: '/opt/coreapps'
+      register: pathcheck
+
+    - name: 'Transfer Image Variable'
+      shell: 'rm -rf /opt/coreapps'
+      when: pathcheck.stat.exists
+
+    - name: Cloning Core Apps
+      git:
+        repo: 'https://github.com/PTS-Team/Apps-Core'
+        dest: /opt/coreapps
+        version: 'master'
+        force: yes
+
+    - name: Set Permission and Owner 
+      shell: 'chown -R 1000:1000 /opt/coreapps && chmod -R 775 /opt/coreapps'
